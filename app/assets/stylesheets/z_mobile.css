@@ -1,0 +1,69 @@
+/* Loaded after the shared wedding styles by stylesheet_link_tag :app. */
+.mobile-wedding-nav { display: none; }
+
+@media (max-width: 760px) {
+  .field input, .field select, .field textarea,
+  .rsvp-form-wrap .field input, .rsvp-form-wrap .field select, .rsvp-form-wrap .field textarea {
+    font-size: 16px;
+    min-height: 46px;
+    max-width: 100%;
+  }
+  .field label, .rsvp-form-wrap .field label { font-size: 13px; }
+  .button { min-height: 44px; }
+}
+
+@media (max-width: 600px) {
+  .wedding-page { padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)); }
+  .wedding-page main, .wedding-page main > section { min-width: 0; }
+  .wedding-page h1, .wedding-page h2, .wedding-page h3,
+  .wedding-page h4, .guest-monogram, .invitation-signature, .guest-footer > span { overflow-wrap: anywhere; }
+  .wedding-page .guest-prose, .guest-event p, .dress-code span, .hero-headline { overflow-wrap: anywhere; }
+  .wedding-page .guest-prose { font-size: 14px; line-height: 1.9; }
+  .wedding-page .guest-subtitle, .guest-event h4 { font-size: 14px; }
+  .wedding-page .guest-event p, .wedding-page .guest-event .event-note { font-size: 13px; }
+  .wedding-page .rsvp-intro > p { font-size: 14px; }
+  .wedding-page .rsvp-privacy, .wedding-page .timezone-note { font-size: 11px; }
+  .wedding-page .rsvp-form-wrap { min-width: 0; }
+  .guest-rsvp-link, .guest-event .text-link { min-height: 44px; }
+  .guest-event .text-link { font-size: 12px; }
+  .mobile-wedding-nav {
+    display: flex;
+    position: fixed;
+    z-index: 30;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-top: 1px solid var(--theme-pale);
+    background: #fcfbf6;
+    box-shadow: 0 -4px 20px #243d3208;
+    padding: 8px max(8px, env(safe-area-inset-right, 0px)) calc(8px + env(safe-area-inset-bottom, 0px)) max(8px, env(safe-area-inset-left, 0px));
+  }
+  .mobile-wedding-nav a {
+    display: flex;
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 52px;
+    gap: 6px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--theme-deep);
+    font-size: 10px;
+    line-height: 1.3;
+    border-radius: 6px;
+  }
+  .mobile-wedding-nav a:hover, .mobile-wedding-nav a:focus-visible { background: var(--theme-pale); }
+  .wedding-page:has(.rsvp-form-wrap :is(input, select, textarea):focus) .mobile-wedding-nav { display: none; }
+  .preview-banner { flex-wrap: wrap; line-height: 1.6; }
+}
+
+@media (max-width: 360px) {
+  .wedding-page .hero-copy h1 { font-size: 54px; }
+  .wedding-page .hero-date { font-size: 11px; letter-spacing: .8px; }
+  .wedding-page .guest-section h2 { font-size: 34px; }
+  .wedding-page .guest-section { padding-inline: 20px; }
+  .wedding-page .rsvp-form-wrap { padding-inline: 18px; }
+  .carousel-controls { gap: 15px; }
+  .carousel-pagination { max-width: calc(100% - 118px); }
+}
