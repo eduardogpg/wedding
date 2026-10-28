@@ -65,4 +65,15 @@ class WeddingTest < ActiveSupport::TestCase
     duplicate.attendance = "invalid"
     assert_not duplicate.valid?
   end
+
+  test "map embed accepts Google copy HTML and rejects other iframe destinations" do
+    event = create_wedding.events.new(title: "Ceremony", starts_at: Time.current, venue_name: "Garden")
+    event.map_embed_url = '<iframe src="https://www.google.com/maps/embed?pb=venue&amp;hl=en" onload="alert(1)"></iframe><script>alert(1)</script>'
+    assert event.valid?
+    assert_equal "https://www.google.com/maps/embed?pb=venue&hl=en", event.map_embed_url
+    ["javascript:alert(1)", "http://www.google.com/maps/embed?pb=venue", "https://www.google.com.attacker.example/maps/embed", "https://attacker.example/maps/embed", "https://www.google.com/maps/search?q=venue", "https://user:pass@www.google.com/maps/embed", "https://www.google.com:444/maps/embed"].each do |url|
+      event.map_embed_url = url
+      assert_not event.valid?, "#{url} must not be embeddable"
+    end
+  end
 end

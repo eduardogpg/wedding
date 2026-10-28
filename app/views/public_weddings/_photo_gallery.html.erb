@@ -1,0 +1,32 @@
+<% photos = wedding.gallery_photos.to_a %>
+<% if wedding.gallery_layout == "grid" %>
+  <div class="guest-gallery gallery-grid">
+    <% photos.each_with_index do |photo, index| %>
+      <%= link_to rails_blob_path(photo, disposition: "inline"), target: "_blank", rel: "noopener" do %>
+        <%= image_tag photo.variant(resize_to_limit: [1000, 1000]), alt: "#{wedding.couple_names} — photo #{index + 1}", loading: "lazy" %>
+      <% end %>
+    <% end %>
+  </div>
+<% else %>
+  <div class="guest-gallery photo-carousel" data-controller="carousel" data-action="keydown->carousel#keydown" role="region" aria-roledescription="carousel" aria-label="Wedding photos">
+    <p class="sr-only" id="carousel-instructions">Use the previous and next buttons, arrow keys, or swipe to browse photos.</p>
+    <div class="carousel-track" data-carousel-target="track" data-action="scroll->carousel#sync" tabindex="0" aria-label="Wedding photo slides" aria-describedby="carousel-instructions">
+      <% photos.each_with_index do |photo, index| %>
+        <div class="carousel-slide" data-carousel-target="slide" role="group" aria-roledescription="slide" aria-label="Photo <%= index + 1 %> of <%= photos.size %>">
+          <%= link_to rails_blob_path(photo, disposition: "inline"), target: "_blank", rel: "noopener", aria: { label: "Open photo #{index + 1} in full size" } do %>
+            <%= image_tag photo.variant(resize_to_limit: [1600, 1200]), alt: "#{wedding.couple_names} — photo #{index + 1}", loading: "lazy", draggable: false %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <% if photos.size > 1 %>
+      <div class="carousel-controls">
+        <button type="button" class="carousel-arrow" data-carousel-target="previous" data-action="carousel#previous" aria-label="Previous photo" disabled><span aria-hidden="true">←</span></button>
+        <div class="carousel-pagination"><div class="carousel-dots" aria-label="Choose a photo">
+          <% photos.each_index do |index| %><button type="button" class="carousel-dot" data-carousel-target="dot" data-action="carousel#choose" data-index="<%= index %>" aria-label="Go to photo <%= index + 1 %>" <%= 'aria-current=true' if index.zero? %>></button><% end %>
+        </div><span class="carousel-counter" data-carousel-target="counter" role="status" aria-live="polite" aria-atomic="true">Photo 1 of <%= photos.size %></span></div>
+        <button type="button" class="carousel-arrow" data-carousel-target="next" data-action="carousel#next" aria-label="Next photo"><span aria-hidden="true">→</span></button>
+      </div>
+    <% end %>
+  </div>
+<% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_25_173223) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_27_000100) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -53,6 +53,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_25_173223) do
     t.integer "position", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "show_map", default: true, null: false
+    t.text "map_embed_url"
     t.index ["wedding_id"], name: "index_events_on_wedding_id"
   end
 
@@ -92,6 +94,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_25_173223) do
     t.date "rsvp_deadline"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "gallery_layout", default: "carousel", null: false
     t.index ["subdomain"], name: "index_weddings_on_subdomain", unique: true
     t.index ["wedding_date"], name: "index_weddings_on_wedding_date"
   end

@@ -92,9 +92,9 @@ class WeddingsController < PlannerController
 
   def wedding_params
     params.require(:wedding).permit(:partner_one, :partner_two, :subdomain, :wedding_date,
-      :timezone, :headline, :invitation_text, :story, :dress_code, :rsvp_deadline, :theme,
+      :timezone, :headline, :invitation_text, :story, :dress_code, :rsvp_deadline, :theme, :gallery_layout,
       :cover_photo, gallery_photos: [],
-      events_attributes: [ :id, :title, :starts_at, :venue_name, :address, :map_url, :notes, :position, :_destroy ])
+      events_attributes: [ :id, :title, :starts_at, :venue_name, :address, :map_url, :show_map, :map_embed_url, :notes, :position, :_destroy ])
   end
 
   def use_wedding_timezone(&action)

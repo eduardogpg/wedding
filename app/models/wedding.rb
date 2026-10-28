@@ -2,6 +2,7 @@ class Wedding < ApplicationRecord
   RESERVED_SUBDOMAINS = %w[app www admin api mail support assets localhost dashboard].freeze
   PHOTO_TYPES = %w[image/jpeg image/png image/webp].freeze
   THEMES = { "sage" => "Garden sage", "rose" => "Dusty rose", "blue" => "Something blue" }.freeze
+  GALLERY_LAYOUTS = { "carousel" => "Photo carousel", "grid" => "Photo grid" }.freeze
   MAX_PHOTO_SIZE = 10.megabytes
 
   has_many :events, -> { order(:starts_at, :position, :id) }, dependent: :destroy, inverse_of: :wedding
@@ -9,7 +10,7 @@ class Wedding < ApplicationRecord
   has_one_attached :cover_photo
   has_many_attached :gallery_photos
   accepts_nested_attributes_for :events, allow_destroy: true,
-    reject_if: ->(attrs) { attrs.except("id", "_destroy", "position").values.all?(&:blank?) }
+    reject_if: ->(attrs) { attrs.except("id", "_destroy", "position", "show_map").values.all?(&:blank?) }
 
   enum :status, { draft: 0, published: 1 }, default: :draft
   normalizes :subdomain, with: ->(value) { value.strip.downcase }
@@ -20,6 +21,7 @@ class Wedding < ApplicationRecord
     format: { with: /\A[a-z0-9]+(?:-[a-z0-9]+)*\z/, message: "can only contain lowercase letters, numbers, and single hyphens" },
     exclusion: { in: RESERVED_SUBDOMAINS, message: "is reserved; please choose another address" }
   validates :theme, inclusion: { in: THEMES.keys }
+  validates :gallery_layout, inclusion: { in: GALLERY_LAYOUTS.keys }
   validates :timezone, inclusion: { in: ActiveSupport::TimeZone.all.map(&:name) }
   validates :headline, length: { maximum: 150 }
   validates :invitation_text, :story, length: { maximum: 10_000 }

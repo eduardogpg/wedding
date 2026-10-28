@@ -173,6 +173,11 @@ button { color: inherit; }
 .current-cover img { max-width: 100%; max-height: 160px; border-radius: 5px; display: block; margin-bottom: 12px; }
 .checkbox-label { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; }
 .checkbox-label input, .photo-edit-grid input { width: 14px; min-height: 0; accent-color: #678050; }
+.event-map-options { border-top: 1px solid #e1e6d8; padding-top: 18px; margin: 4px 0 20px; }
+.map-toggle { cursor: pointer; color: #54694a; font-size: 12px; line-height: 1.6; }
+.map-toggle input { width: 16px; height: 16px; flex-shrink: 0; }
+.map-help { color: #738367; font-size: 11px; line-height: 1.8; margin-bottom: 17px; }
+.event-map-options .field textarea { font-size: 11px; }
 .photo-edit-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
 .photo-edit-grid img { width: 100%; height: 110px; object-fit: cover; border-radius: 4px; }
 .photo-edit-grid span { font-size: 9px; display: flex; align-items: center; gap: 5px; padding-top: 7px; }

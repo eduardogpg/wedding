@@ -4,5 +4,10 @@
   <div class="field"><%= form.label :venue_name, "Venue name" %><%= form.text_field :venue_name, maxlength: 160, placeholder: "Hacienda San Gabriel" %></div>
   <div class="field"><%= form.label :address, "Address" %><%= form.text_field :address, maxlength: 1_000, placeholder: "Street, city, and postal code" %></div>
   <div class="field"><%= form.label :map_url, "Map link (optional)" %><%= form.url_field :map_url, placeholder: "https://maps.google.com/…" %><small>We’ll create a map search link from the venue and address if left blank.</small></div>
+  <div class="event-map-options">
+    <label class="checkbox-label map-toggle"><%= form.check_box :show_map %><span>Show Google Maps on the wedding page</span></label>
+    <p class="map-help">The map uses the venue name and address. For an exact pin, paste an embed from Google Maps below.</p>
+    <div class="field"><%= form.label :map_embed_url, "Google Maps embed code or URL (optional)" %><%= form.text_area :map_embed_url, rows: 3, maxlength: 6_000, placeholder: 'Paste the code from Google Maps → Share → Embed a map → Copy HTML' %><small>Use the “Embed a map” tab, rather than the short sharing link.</small></div>
+  </div>
   <div class="field"><%= form.label :notes, "A little extra detail (optional)" %><%= form.text_area :notes, rows: 2, maxlength: 1_000, placeholder: "Please arrive 15 minutes before the ceremony." %></div>
 </fieldset>
