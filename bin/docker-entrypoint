@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ "${1:-}" == "bin/rails" && "${2:-}" == "server" ]]; then
+  rm -f /app/tmp/pids/server.pid
+  bin/rails db:prepare
+  bin/rails db:seed
+fi
+
+exec "$@"

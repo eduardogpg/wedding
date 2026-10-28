@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS", 5) %>
+  host: <%= ENV.fetch("DATABASE_HOST", "localhost") %>
+  username: <%= ENV.fetch("DATABASE_USER", "boda") %>
+  password: <%= ENV.fetch("DATABASE_PASSWORD", "boda_local_password") %>
+
+development:
+  <<: *default
+  database: boda_development
+
+test:
+  <<: *default
+  database: boda_test
+
+production:
+  <<: *default
+  url: <%= ENV["DATABASE_URL"] %>
+  database: boda_production

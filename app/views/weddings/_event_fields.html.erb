@@ -1,0 +1,8 @@
+<fieldset class="event-editor" data-event-card><legend class="sr-only">Wedding event</legend><%= form.hidden_field :_destroy, value: false, data: { destroy_field: true } %><%= form.hidden_field :position %>
+  <div class="event-editor-heading"><span><%= icon "clock", size: 16 %> Schedule event</span><button type="button" class="remove-event" data-action="wedding-form#removeEvent">Remove event</button></div>
+  <div class="field-row"><div class="field"><%= form.label :title, "Event name" %><%= form.text_field :title, placeholder: "Ceremony", maxlength: 160 %></div><div class="field"><%= form.label :starts_at, "Date & time" %><%= form.datetime_local_field :starts_at, value: form.object.starts_at&.in_time_zone(wedding.timezone)&.strftime("%Y-%m-%dT%H:%M") %></div></div>
+  <div class="field"><%= form.label :venue_name, "Venue name" %><%= form.text_field :venue_name, maxlength: 160, placeholder: "Hacienda San Gabriel" %></div>
+  <div class="field"><%= form.label :address, "Address" %><%= form.text_field :address, maxlength: 1_000, placeholder: "Street, city, and postal code" %></div>
+  <div class="field"><%= form.label :map_url, "Map link (optional)" %><%= form.url_field :map_url, placeholder: "https://maps.google.com/…" %><small>We’ll create a map search link from the venue and address if left blank.</small></div>
+  <div class="field"><%= form.label :notes, "A little extra detail (optional)" %><%= form.text_area :notes, rows: 2, maxlength: 1_000, placeholder: "Please arrive 15 minutes before the ceremony." %></div>
+</fieldset>

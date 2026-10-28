@@ -1,0 +1,4 @@
+<% content_for :title, "Create a wedding · Boda" %><% content_for :breadcrumb, "New wedding" %>
+<%= link_to "← Back to your weddings", root_path, class: "back-link" %>
+<section class="page-heading compact"><div><span class="eyebrow">THE START OF SOMETHING BEAUTIFUL</span><h1>A new love story.</h1><p>Make a home for the details that make their day.</p></div></section>
+<%= render "form", wedding: @wedding %>

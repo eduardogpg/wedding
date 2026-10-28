@@ -1,0 +1,47 @@
+name: boda
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: boda
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-boda_local_password}
+      POSTGRES_DB: boda_development
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U boda -d boda_development"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+  web:
+    build: .
+    ports:
+      - "127.0.0.1:${APP_PORT:-3001}:3000"
+    environment:
+      RAILS_ENV: development
+      DATABASE_HOST: db
+      DATABASE_USER: boda
+      DATABASE_PASSWORD: ${POSTGRES_PASSWORD:-boda_local_password}
+      APP_DOMAIN: ${APP_DOMAIN:-localhost}
+      APP_PORT: ${APP_PORT:-3001}
+      APP_PROTOCOL: http
+      PLANNER_EMAIL: ${PLANNER_EMAIL:-planner@example.com}
+      PLANNER_PASSWORD: ${PLANNER_PASSWORD:-wedding-planner-2026}
+      SEED_DEMO: ${SEED_DEMO:-true}
+    volumes:
+      - .:/app
+      - uploads:/app/storage
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "ruby", "-rnet/http", "-e", "exit(Net::HTTP.get_response(URI('http://127.0.0.1:3000/up')).is_a?(Net::HTTPSuccess) ? 0 : 1)"]
+      interval: 10s
+      timeout: 5s
+      start_period: 30s
+      retries: 10
+    stdin_open: true
+    tty: true
+volumes:
+  postgres_data:
+  uploads:

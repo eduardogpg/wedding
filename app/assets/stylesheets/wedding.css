@@ -1,0 +1,85 @@
+.wedding-page { --wedding-serif: Georgia, 'Times New Roman', serif; color: var(--theme-deep); background: #fcfbf6; }
+.wedding-page .eyebrow { color: var(--theme-accent); font-size: 9px; letter-spacing: 2.2px; }
+.preview-banner { background: #293f30; color: #fff; display: flex; justify-content: space-between; padding: 12px 35px; font-size: 11px; gap: 20px; }
+.preview-banner a { text-decoration: underline; text-underline-offset: 3px; }
+.guest-nav { height: 95px; display: flex; justify-content: space-between; align-items: center; margin: 0 auto; max-width: 1440px; padding: 0 70px; border-bottom: 1px solid #e4e4d7; }
+.guest-monogram { font: italic 27px var(--wedding-serif); letter-spacing: 1px; }
+.guest-nav nav { display: flex; align-items: center; gap: 33px; font-size: 11px; color: var(--theme-accent); }
+.guest-nav nav a:hover { color: var(--theme-deep); }
+.guest-rsvp-link { display: inline-flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--theme-accent); padding-bottom: 6px; color: var(--theme-deep); }
+.wedding-hero { display: grid; grid-template-columns: 1.1fr 1fr; max-width: 1440px; margin: 0 auto; min-height: 720px; padding: 65px 100px; gap: 50px; align-items: center; position: relative; }
+.hero-copy { padding-top: 12px; }
+.hero-copy .eyebrow { margin-bottom: 26px; font-size: 8px; }
+.hero-copy h1 { font: 76px/1.08 var(--wedding-serif); letter-spacing: -3px; margin: 0; display: flex; flex-direction: column; overflow-wrap: anywhere; }
+.hero-copy h1 em { font-size: 43px; font-weight: 400; color: var(--theme-accent); margin: 10px 0 7px 45px; }
+.hero-rule { width: 55px; height: 1px; background: var(--theme-accent); opacity: .45; margin: 28px 0 24px; }
+.hero-date { font-size: 12px; letter-spacing: 1.1px; text-transform: uppercase; margin-bottom: 13px; }
+.hero-headline { font: italic 19px var(--wedding-serif); color: var(--theme-accent); margin-bottom: 30px; }
+.wedding-button { background: var(--theme-deep); color: #fff; border-color: var(--theme-deep); padding: 15px 24px; font-size: 11px; border-radius: 3px; font-weight: 500; }
+.wedding-button:hover { background: var(--theme-accent); border-color: var(--theme-accent); }
+.hero-countdown { display: block; margin-top: 25px; font-size: 7px; letter-spacing: 2px; color: var(--theme-accent); }
+.hero-art { display: flex; justify-content: center; align-items: center; height: 560px; }
+.botanical-arch { width: 100%; max-width: 390px; height: 530px; border-radius: 210px 210px 4px 4px; background: var(--theme-pale); position: relative; overflow: hidden; color: var(--theme-accent); }
+.botanical-arch .botanical { position: absolute; bottom: -65px; width: 100%; height: 100%; opacity: .8; }
+.botanical-arch > span { position: absolute; top: 190px; width: 100%; text-align: center; font: italic 48px var(--wedding-serif); letter-spacing: 7px; color: var(--theme-deep); }
+.botanical-arch small { position: absolute; top: 265px; width: 100%; text-align: center; font-size: 7px; letter-spacing: 2px; color: var(--theme-accent); }
+.hero-photo { width: 100%; height: 530px; max-width: 430px; object-fit: cover; border-radius: 220px 220px 4px 4px; }
+.guest-section { padding: 90px max(70px, calc((100% - 1100px)/2)); }
+.guest-section h2 { font: 49px/1.15 var(--wedding-serif); letter-spacing: -1.4px; font-weight: 400; margin: 20px 0; }
+.guest-section h2 em { font-weight: 400; color: var(--theme-accent); }
+.invitation-section { text-align: center; border-top: 1px solid #e4e4d7; background: var(--theme-soft); }
+.guest-flower { display: block; font-size: 31px; color: var(--theme-accent); margin-bottom: 27px; }
+.invitation-section h2 { max-width: 650px; margin: 23px auto; font-size: 43px; }
+.guest-prose { font-size: 13px; color: var(--theme-accent); line-height: 2.2; overflow-wrap: anywhere; }
+.guest-prose p { margin-bottom: 20px; }
+.invitation-section .guest-prose { max-width: 650px; margin: 25px auto 28px; }
+.invitation-signature { font: italic 24px var(--wedding-serif); }
+.story-section { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; border-bottom: 1px solid #e4e4d7; }
+.story-section h2 { font-size: 53px; }
+.story-sparkle { font-size: 32px; color: var(--theme-accent); display: block; margin-top: 25px; }
+.celebration-section { text-align: center; }
+.guest-subtitle { color: var(--theme-accent); font-size: 12px; line-height: 1.9; }
+.guest-events { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; margin: 50px 0 28px; }
+.guest-event { padding: 10px 25px 24px; position: relative; }
+.guest-event + .guest-event { border-left: 1px solid #e4e4d7; }
+.event-index { display: block; font: italic 29px var(--wedding-serif); color: var(--theme-accent); margin-bottom: 25px; opacity: .65; }
+.event-time { font-size: 9px; letter-spacing: 1.8px; text-transform: uppercase; color: var(--theme-accent); }
+.guest-event h3 { font: 31px var(--wedding-serif); margin: 17px 0 22px; letter-spacing: -.5px; }
+.guest-event h4 { font-size: 12px; font-weight: 500; margin-bottom: 10px; }
+.guest-event p { color: var(--theme-accent); font-size: 11px; line-height: 1.9; max-width: 310px; margin-inline: auto; }
+.guest-event .event-note { font-size: 10px; margin-top: 20px; max-width: 270px; }
+.guest-event .text-link { font-size: 10px; margin-top: 10px; color: var(--theme-deep); }
+.timezone-note { color: var(--theme-accent); font-size: 9px; }
+.dress-code { display: flex; align-items: center; justify-content: center; gap: 14px; margin: 45px auto 0; padding: 23px; border: 1px solid #e4e4d7; max-width: 550px; border-radius: 3px; color: var(--theme-accent); }
+.dress-code span { display: flex; flex-direction: column; gap: 8px; text-align: left; font-size: 11px; line-height: 1.7; }
+.dress-code strong { color: var(--theme-deep); font-size: 10px; font-weight: 500; }
+.moments-section { background: var(--theme-soft); text-align: center; }
+.guest-gallery { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-top: 40px; }
+.guest-gallery a { display: block; overflow: hidden; height: 300px; }
+.guest-gallery img { width: 100%; height: 100%; object-fit: cover; transition: transform .3s; }
+.guest-gallery a:hover img { transform: scale(1.035); }
+.rsvp-section { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; background: var(--theme-pale); align-items: start; }
+.rsvp-intro h2 { font-size: 61px; margin-top: 23px; }
+.rsvp-intro > p { font-size: 12px; color: var(--theme-accent); max-width: 260px; line-height: 1.9; }
+.rsvp-deadline { font-size: 10px; color: var(--theme-deep); display: block; margin-top: 25px; }
+.rsvp-intro .guest-flower { margin-top: 35px; font-size: 36px; }
+.rsvp-form-wrap { background: #fffef8c7; padding: 30px; border: 1px solid #ffffffb8; border-radius: 5px; }
+.rsvp-form-wrap .field input, .rsvp-form-wrap .field select, .rsvp-form-wrap .field textarea { background: #ffffffa8; border-color: #d8d9c9; color: var(--theme-deep); }
+.rsvp-form-wrap .field label { color: var(--theme-deep); font-size: 10px; }
+.rsvp-form-wrap .field input::placeholder, .rsvp-form-wrap .field textarea::placeholder { color: var(--theme-accent); opacity: .65; }
+.rsvp-form-wrap .field-row { gap: 12px; }
+.rsvp-form-wrap .flash { font-size: 11px; }
+.rsvp-form-wrap .flash-alert { color: #974e42; }
+.rsvp-privacy { margin: 17px 0 0; text-align: center; font-size: 8px; color: var(--theme-accent); line-height: 1.8; }
+.preview-rsvp-note { text-align: center; padding: 25px 5px; }
+.preview-rsvp-note > svg { color: var(--theme-accent); margin-bottom: 18px; }
+.preview-rsvp-note h3 { font: 26px var(--wedding-serif); }
+.preview-rsvp-note p { color: var(--theme-accent); font-size: 11px; line-height: 2; margin-bottom: 25px; }
+.guest-footer { padding: 55px 20px; text-align: center; }
+.guest-footer > span { font: italic 29px var(--wedding-serif); }
+.guest-footer p { color: var(--theme-accent); font-size: 10px; margin-top: 12px; }
+.guest-footer small { color: var(--theme-accent); font-size: 7px; letter-spacing: 1.7px; display: block; margin-top: 28px; }
+@media (min-width: 1600px) { .wedding-hero { padding-inline: 80px; } }
+@media (max-width: 1100px) { .wedding-hero { padding: 50px 65px; min-height: 640px; gap: 30px; } .hero-copy h1 { font-size: 65px; } .hero-art { height: 500px; } .botanical-arch, .hero-photo { height: 470px; } .guest-section { padding: 75px 65px; } .rsvp-section { gap: 50px; } .guest-nav { padding-inline: 55px; } .rsvp-form-wrap { padding: 25px; } }
+@media (max-width: 800px) { .guest-nav { height: 80px; padding-inline: 30px; } .guest-nav nav { gap: 18px; font-size: 10px; } .wedding-hero { padding: 45px 35px; min-height: auto; gap: 25px; } .hero-copy h1 { font-size: 53px; } .hero-copy .eyebrow { font-size: 6px; letter-spacing: 1.4px; } .hero-art { height: 430px; } .botanical-arch, .hero-photo { height: 400px; } .botanical-arch > span { top: 145px; font-size: 35px; } .botanical-arch small { top: 204px; font-size: 6px; } .botanical-arch .botanical { bottom: -55px; } .hero-headline { font-size: 16px; line-height: 1.5; } .hero-date { font-size: 10px; } .guest-section { padding: 65px 35px; } .story-section { gap: 35px; } .story-section h2 { font-size: 45px; } .guest-prose { font-size: 12px; } .rsvp-section { gap: 35px; } .rsvp-intro h2 { font-size: 48px; } .rsvp-form-wrap { padding: 23px; } .rsvp-form-wrap .field-row { flex-direction: column; gap: 0; } .guest-gallery { gap: 12px; } .guest-gallery a { height: 200px; } }
+@media (max-width: 600px) { .guest-nav { padding: 0 22px; height: 74px; } .guest-monogram { font-size: 22px; } .guest-nav nav { gap: 18px; } .guest-nav nav a:not(.guest-rsvp-link) { display: none; } .guest-rsvp-link { font-size: 10px; } .wedding-hero { display: flex; flex-direction: column; padding: 45px 25px 50px; gap: 38px; } .hero-copy { text-align: center; width: 100%; } .hero-copy .eyebrow { font-size: 7px; letter-spacing: 1.8px; margin-bottom: 23px; } .hero-copy h1 { font-size: 65px; letter-spacing: -2px; } .hero-copy h1 em { margin: 9px 0; font-size: 35px; } .hero-rule { margin: 25px auto 20px; } .hero-headline { font-size: 18px; margin-bottom: 25px; } .hero-copy .button { font-size: 11px; } .hero-countdown { margin-top: 21px; } .hero-art { width: 100%; max-width: 350px; height: 400px; } .botanical-arch { height: 400px; max-width: 310px; } .botanical-arch > span { top: 145px; font-size: 41px; } .botanical-arch small { top: 211px; } .hero-photo { height: 400px; max-width: 310px; } .guest-section { padding: 62px 25px; } .guest-section h2 { font-size: 38px; } .invitation-section h2 { font-size: 35px; } .guest-section .eyebrow { font-size: 7px; letter-spacing: 1.7px; } .guest-prose { font-size: 12px; } .story-section { grid-template-columns: 1fr; gap: 18px; text-align: center; } .story-section h2 { font-size: 43px; } .story-sparkle { display: none; } .guest-events { grid-template-columns: 1fr; gap: 22px; margin-top: 35px; } .guest-event { padding: 22px 10px; } .guest-event + .guest-event { border-left: 0; border-top: 1px solid #e4e4d7; padding-top: 35px; } .event-index { margin-bottom: 18px; } .guest-event h3 { font-size: 31px; } .dress-code { padding: 20px; margin-top: 28px; } .guest-gallery { grid-template-columns: repeat(2,1fr); gap: 10px; } .guest-gallery a { height: 190px; } .rsvp-section { grid-template-columns: 1fr; gap: 20px; } .rsvp-intro { text-align: center; } .rsvp-intro h2 { font-size: 49px; } .rsvp-intro > p { margin-inline: auto; } .rsvp-intro .guest-flower { display: none; } .rsvp-deadline { margin-bottom: 25px; } .rsvp-form-wrap { padding: 25px 22px; } .preview-banner { font-size: 9px; padding-inline: 18px; } }

@@ -1,0 +1,4 @@
+<% content_for :title, "Edit #{@wedding.couple_names} · Boda" %><% content_for :breadcrumb, "Edit wedding" %>
+<%= link_to "← Back to wedding", wedding_path(@wedding), class: "back-link" %>
+<section class="page-heading compact"><div><span class="eyebrow">EVERY LITTLE DETAIL</span><h1><%= @wedding.couple_names %></h1><p>Bring their celebration to life, one detail at a time.</p></div><%= link_to preview_wedding_path(@wedding), class: "button button-secondary" do %><%= icon "external", size: 17 %> Preview page<% end %></section>
+<%= render "form", wedding: @wedding %>

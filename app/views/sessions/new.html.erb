@@ -1,0 +1,9 @@
+<section class="auth-art"><a class="brand" href="/">✳ boda.</a><div><span class="eyebrow">THOUGHTFULLY PLANNED. JOYFULLY CELEBRATED.</span><h1>Every love story<br>deserves a<br><em>beautiful beginning.</em></h1><p>A little less planning.<br>A little more happily ever after.</p></div><%= render "shared/botanical" %><small>YOUR WEDDING PLANNER STUDIO</small></section>
+<main class="auth-main"><div class="auth-form"><span class="eyebrow">WELCOME TO YOUR PLANNER SPACE</span><h1>Good to have you here.</h1><p class="muted">Sign in and bring your next celebration to life.</p><%= render "shared/flashes" %>
+  <%= form_with url: session_path, class: "stack-form" do |form| %>
+    <div class="field"><%= form.label :email, "Email address" %><%= form.email_field :email, required: true, autocomplete: "username", autofocus: true, placeholder: "you@example.com", value: params[:email] %></div>
+    <div class="field"><%= form.label :password %><%= form.password_field :password, required: true, autocomplete: "current-password" %></div>
+    <%= form.button class: "button button-primary full-width" do %>Sign in to your studio <%= icon "arrow", size: 18 %><% end %>
+  <% end %>
+  <p class="auth-footnote">Your private space to plan something wonderful.</p>
+</div></main>

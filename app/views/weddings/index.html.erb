@@ -1,0 +1,24 @@
+<% content_for :title, "Your weddings · Boda" %>
+<section class="page-heading"><div><span class="eyebrow">A LITTLE PLANNING. A LOT OF LOVE.</span><h1>Beautiful days start here<span class="sage-text">.</span></h1><p>Every couple, every detail, every happily ever after.</p></div><%= link_to new_wedding_path, class: "button button-primary" do %><%= icon "plus", size: 18 %> Create a wedding<% end %></section>
+<div class="stats-grid">
+  <div class="stat-card"><span class="stat-icon"><%= icon "heart" %></span><div><span class="stat-label">TOTAL WEDDINGS</span><strong><%= @total.to_s.rjust(2, '0') %></strong><small>Love stories in your care</small></div></div>
+  <div class="stat-card"><span class="stat-icon blue"><%= icon "globe" %></span><div><span class="stat-label">PUBLISHED PAGES</span><strong><%= @published.to_s.rjust(2, '0') %></strong><small>Ready to share with guests</small></div></div>
+  <div class="stat-card"><span class="stat-icon peach"><%= icon "calendar" %></span><div><span class="stat-label">UPCOMING WEDDINGS</span><strong><%= @upcoming.to_s.rjust(2, '0') %></strong><small>Wonderful things on the horizon</small></div></div>
+</div>
+<% if @next_wedding %>
+  <section class="next-wedding"><div class="next-copy"><span class="eyebrow">NEXT ON YOUR CALENDAR</span><h2><%= @next_wedding.couple_names %></h2><p><%= wedding_date_label(@next_wedding) %><span>·</span><%= days_until(@next_wedding) == 0 ? "Today is the day!" : "#{days_until(@next_wedding)} days to go" %></p><%= link_to wedding_path(@next_wedding), class: "text-link" do %>Let’s make it a beautiful day <%= icon "arrow", size: 17 %><% end %></div><div class="next-art"><%= render "shared/botanical" %><span class="next-monogram"><%= @next_wedding.initials %></span></div></section>
+<% end %>
+<section id="wedding-list" class="wedding-list"><div class="section-heading"><div><h2>Your weddings <span class="count-pill"><%= @total %></span></h2><p>A home for every celebration you’re bringing to life.</p></div></div>
+  <div class="list-toolbar"><nav class="filter-tabs" aria-label="Wedding status"><% { "all" => "All weddings", "published" => "Published", "draft" => "Drafts" }.each do |value, label| %><%= link_to label, root_path(status: value, q: @query, anchor: "wedding-list"), class: "filter-tab #{'selected' if @filter == value}", aria: { current: @filter == value ? "page" : nil } %><% end %></nav>
+    <%= form_with url: root_path(anchor: "wedding-list"), method: :get, class: "search-form" do |form| %><%= form.hidden_field :status, value: @filter %><%= form.label :q, "Search weddings", class: "sr-only" %><%= icon "search", size: 17 %><%= form.search_field :q, value: @query, placeholder: "Search by couple or address…" %><%= form.submit "Search", class: "search-submit" %><% end %>
+  </div>
+  <% if @weddings.any? %><div class="wedding-grid"><% @weddings.each do |wedding| %><article class="wedding-card theme-<%= wedding.theme %>">
+    <%= link_to wedding_path(wedding), class: "card-cover", aria: { label: "Manage #{wedding.couple_names}" } do %>
+      <% if wedding.cover_photo.attached? %><%= image_tag wedding.cover_photo.variant(resize_to_limit: [900, 600]), alt: wedding.couple_names, loading: "lazy" %><% else %><%= render "shared/botanical" %><span class="cover-initials"><%= wedding.initials %></span><% end %>
+      <span class="status-badge <%= wedding.status %>"><span></span><%= wedding.status.capitalize %></span>
+    <% end %>
+    <div class="card-body"><span class="card-date"><%= icon "calendar", size: 14 %><%= wedding_date_label(wedding) %></span><h3><%= link_to wedding.couple_names, wedding_path(wedding) %></h3><p class="card-domain"><%= wedding.subdomain %>.<%= Rails.configuration.x.app_domain %></p><div class="card-actions"><%= link_to "Manage wedding", wedding_path(wedding), class: "text-link" %><%= link_to preview_wedding_path(wedding), class: "card-preview", title: "Preview wedding page" do %><%= icon "external", size: 17 %><span class="sr-only">Preview <%= wedding.couple_names %></span><% end %></div></div>
+  </article><% end %>
+  <%= link_to new_wedding_path, class: "new-wedding-card" do %><span><%= icon "plus", size: 25 %></span><h3>A new beginning</h3><p>Give your next love story<br>a place to grow.</p><strong>Create a wedding <%= icon "arrow", size: 16 %></strong><% end %></div>
+  <% else %><div class="empty-state"><span>✳</span><h3><%= @query.present? || @filter != "all" ? "No weddings found" : "Your next love story starts here" %></h3><p><%= @query.present? || @filter != "all" ? "Try another search or view all weddings." : "Create your first wedding and give the celebration a beautiful home." %></p><%= link_to "View all weddings", root_path, class: "button button-secondary" if @query.present? || @filter != "all" %><%= link_to "Create a wedding", new_wedding_path, class: "button button-primary" if @total.zero? %></div><% end %>
+</section>
