@@ -44,6 +44,20 @@ RSVPs accept a maximum party of 10, one response per email per wedding. The
 optional deadline closes responses after that date. All responses close after
 the wedding date. Responses are stored locally; no emails are sent.
 
+## Live event mock
+
+On branch `codex/live-wedding-mock`, try the Spanish live-wedding experience at
+<http://eduardo-and-raquel.localhost:3001/fiesta>. The planner also has a
+**Preview live event** button; signed-in planners can preview drafts.
+
+The mock presents two main actions: **Subir fotos** and **Dejar buenos deseos**.
+You can choose photos to see local thumbnails, remove selections, write a wish,
+and try the confirmation screens. All interactions use temporary browser memory.
+The mock makes no uploads or submissions and stores no photos or messages.
+It does not change wedding dates or automatically switch the invitation’s phase.
+
+The normal invitation remains at `/`; `/fiesta` is an explicit mock route.
+
 ## Photo carousel and venue maps
 
 In **Edit wedding → Photos & style**, choose **Photo carousel** under **Gallery

@@ -1,0 +1,79 @@
+<% invitation_path = @preview ? preview_wedding_path(@wedding) : guest_root_path %>
+<div class="live-experience" data-controller="live-event">
+  <div class="live-demo-banner"><span>VISTA DE MUESTRA · DURANTE LA BODA</span><span>Fotos y mensajes de prueba</span></div>
+  <header class="live-header">
+    <%= link_to invitation_path, class: "guest-monogram", aria: { label: "Ver la invitación de #{@wedding.couple_names}" } do %><%= @wedding.initials %><% end %>
+    <span class="live-badge"><span aria-hidden="true"></span> Estamos celebrando</span>
+  </header>
+
+  <main class="live-main">
+    <section class="live-welcome" aria-labelledby="live-heading">
+      <div class="live-welcome-art"><%= render "shared/botanical" %></div>
+      <span class="live-eyebrow">¡LA FIESTA YA COMENZÓ!</span>
+      <h1 id="live-heading">Qué alegría<br><em>tenerte aquí.</em></h1>
+      <p class="live-couple">Hoy celebramos a <strong><%= @wedding.couple_names %></strong></p>
+      <p class="live-intro">Los mejores recuerdos también los cuentan nuestros invitados.<br class="live-desktop-break"> Comparte un pedacito de este día con nosotros.</p>
+    </section>
+
+    <section class="live-actions" aria-label="Comparte un recuerdo">
+      <button type="button" class="live-action live-action-photos" data-action="live-event#openPhotos" aria-haspopup="dialog" aria-controls="live-photo-dialog" aria-label="Subir fotos del evento">
+        <span class="live-action-icon"><%= icon "camera", size: 28 %></span>
+        <span class="live-action-copy"><span class="live-action-kicker">TU MIRADA, NUESTRO RECUERDO</span><strong>Subir fotos</strong><span>Esas sonrisas, ese baile, ese momento.<br> Nos encantará verlo como tú lo viviste.</span><span class="live-action-prompt">Tomar una foto o elegir del teléfono <%= icon "arrow", size: 17 %></span></span>
+        <span class="live-card-number" aria-hidden="true">01</span>
+      </button>
+      <button type="button" class="live-action live-action-wishes" data-action="live-event#openWishes" aria-haspopup="dialog" aria-controls="live-wish-dialog" aria-label="Dejar buenos deseos">
+        <span class="live-action-icon"><%= icon "book", size: 28 %></span>
+        <span class="live-action-copy"><span class="live-action-kicker">NUESTRO LIBRO DE BUENOS DESEOS</span><strong>Dejar buenos deseos</strong><span>Un deseo, una anécdota o unas palabras<br> que podamos guardar para siempre.</span><span class="live-action-prompt">Escribir una página de nuestra historia <%= icon "arrow", size: 17 %></span></span>
+        <span class="live-card-number" aria-hidden="true">02</span>
+      </button>
+    </section>
+
+    <p class="live-little-note"><%= icon "heart", size: 15 %> Gracias por ser parte de nuestra historia.</p>
+
+    <details class="live-event-details">
+      <summary><%= icon "pin", size: 17 %> Programa y ubicación <span aria-hidden="true">+</span></summary>
+      <div class="live-event-details-content">
+        <% if @wedding.events.any? %><% @wedding.events.each do |event| %><article><span class="live-event-time"><%= event_time(event, @wedding) %></span><div><h3><%= event.title %></h3><p><%= event.venue_name %><br><%= event.address %></p><%= link_to event.map_link, target: "_blank", rel: "noopener", class: "text-link" do %>Abrir en Google Maps <%= icon "external", size: 13 %><% end %></div></article><% end %><p class="live-details-timezone">Horarios de <%= @wedding.timezone %>.</p><% else %><p>Los detalles de la celebración están en la invitación.</p><% end %>
+      </div>
+    </details>
+    <%= link_to "Ver la invitación completa", invitation_path, class: "live-invitation-link" %>
+  </main>
+
+  <footer class="live-footer"><span><%= @wedding.couple_names %></span><small>UN DÍA PARA RECORDAR · BODA</small></footer>
+
+  <dialog class="live-dialog" id="live-photo-dialog" data-live-event-target="photosDialog" data-action="click->live-event#closeBackdrop close->live-event#clearPhotos" aria-labelledby="live-photo-title" aria-describedby="live-photo-description">
+    <div class="live-dialog-content">
+      <button type="button" class="live-dialog-close" data-action="live-event#closePhotos" aria-label="Cerrar fotos">×</button>
+      <span class="live-dialog-symbol"><%= icon "camera", size: 27 %></span><span class="live-eyebrow">UN RECUERDO DESDE TUS OJOS</span>
+      <h2 id="live-photo-title">Comparte ese momento.</h2><p id="live-photo-description" class="live-dialog-intro">Las fotos espontáneas también cuentan nuestra historia.</p>
+      <form method="dialog" data-live-event-target="photoForm" data-action="submit->live-event#sharePhotos" data-turbo="false">
+        <div class="live-photo-picker"><%= icon "image", size: 30 %><p>Un baile, un abrazo, una mesa llena de amigos.</p><div class="live-picker-buttons"><button type="button" class="button live-primary-button" data-action="live-event#choosePhotos"><%= icon "image", size: 17 %> Elegir fotos</button><button type="button" class="button live-secondary-button" data-action="live-event#takePhoto"><%= icon "camera", size: 17 %> Tomar foto</button></div><small>JPG, PNG o WebP · Hasta 10 fotos · 10 MB por foto</small></div>
+        <input type="file" accept="image/jpeg,image/png,image/webp" multiple hidden data-live-event-target="photoInput" data-action="change->live-event#selectPhotos" aria-label="Elegir fotos del evento">
+        <input type="file" accept="image/jpeg,image/png,image/webp" capture="environment" hidden data-live-event-target="cameraInput" data-action="change->live-event#selectPhotos" aria-label="Tomar una foto del evento">
+        <p class="live-photo-error" data-live-event-target="photoError" role="alert" hidden></p>
+        <div class="live-selected-photos" data-live-event-target="photoPreviews" aria-label="Fotos seleccionadas"></div>
+        <p class="live-photo-count" data-live-event-target="photoCount" role="status" aria-live="polite">Todavía no has elegido fotos.</p>
+        <div class="field"><label for="live-photo-name">Tu nombre <span>(opcional)</span></label><input id="live-photo-name" type="text" autocomplete="name" maxlength="80"></div>
+        <div class="field"><label for="live-photo-caption">Una pequeña historia <span>(opcional)</span></label><textarea id="live-photo-caption" rows="2" maxlength="500" placeholder="Este momento merecía una foto…"></textarea></div>
+        <button type="submit" class="button live-primary-button full-width" data-live-event-target="photoSubmit" disabled>Compartir fotos <%= icon "arrow", size: 17 %></button>
+        <p class="live-demo-note">Demostración: las fotos se previsualizan en este navegador y no se envían ni se guardan.</p>
+      </form>
+      <section class="live-thank-you" data-live-event-target="photoDone" aria-live="polite" hidden><span class="live-success-icon"><%= icon "check", size: 30 %></span><h3>Un momento para recordar.</h3><p data-live-event-target="photoResult"></p><p class="live-demo-note">Esta es una vista de prueba. No se enviaron ni guardaron archivos.</p><button type="button" class="button live-primary-button" data-action="live-event#closePhotos">Volver a la fiesta <%= icon "heart", size: 17 %></button></section>
+    </div>
+  </dialog>
+
+  <dialog class="live-dialog live-wish-dialog" id="live-wish-dialog" data-live-event-target="wishesDialog" data-action="click->live-event#closeBackdrop" aria-labelledby="live-wish-title" aria-describedby="live-wish-description">
+    <div class="live-dialog-content">
+      <button type="button" class="live-dialog-close" data-action="live-event#closeWishes" aria-label="Cerrar buenos deseos">×</button>
+      <span class="live-dialog-symbol"><%= icon "book", size: 27 %></span><span class="live-eyebrow">UNA PÁGINA QUE GUARDAREMOS SIEMPRE</span>
+      <h2 id="live-wish-title">Palabras que se quedan.</h2><p id="live-wish-description" class="live-dialog-intro">Como en el libro de buenos deseos, pero con espacio para cada recuerdo.</p>
+      <form method="dialog" data-live-event-target="wishForm" data-action="submit->live-event#shareWish" data-turbo="false">
+        <div class="field"><label for="live-wish-name">Tu nombre o firma <span>(opcional)</span></label><input id="live-wish-name" type="text" autocomplete="name" maxlength="80" placeholder="Con cariño, …" data-live-event-target="wishName"></div>
+        <div class="field"><label for="live-wish-message">Tus buenos deseos</label><textarea id="live-wish-message" class="live-notepaper" rows="6" required maxlength="1000" placeholder="Queridos <%= @wedding.partner_one %> y <%= @wedding.partner_two %>, les deseo…" data-live-event-target="wishMessage" data-action="input->live-event#updateWishCount"></textarea><span class="live-character-count" data-live-event-target="wishCount">0 / 1000</span></div>
+        <button type="submit" class="button live-primary-button full-width">Dejar mis buenos deseos <%= icon "heart", size: 17 %></button>
+        <p class="live-demo-note">Demostración: puedes probar el mensaje aquí. No se envía ni se guarda.</p>
+      </form>
+      <section class="live-thank-you" data-live-event-target="wishDone" aria-live="polite" hidden><span class="live-success-icon"><%= icon "heart", size: 30 %></span><h3>Una página llena de cariño.</h3><blockquote class="live-wish-preview"><p data-live-event-target="wishResult"></p><cite data-live-event-target="wishSignature"></cite></blockquote><p class="live-demo-note">Así se verá la confirmación. Este mensaje de prueba no se envió ni se guardó.</p><button type="button" class="button live-primary-button" data-action="live-event#closeWishes">Volver a la fiesta <%= icon "arrow", size: 17 %></button></section>
+    </div>
+  </dialog>
+</div>

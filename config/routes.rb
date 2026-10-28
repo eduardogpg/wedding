@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   constraints ->(request) { request.host.match?(/\A[a-z0-9]+(?:-[a-z0-9]+)*\.#{Regexp.escape(domain)}\z/) && !planner_hosts.include?(request.host) } do
     get "/", to: "public_weddings#show", as: :guest_root
+    get "/fiesta", to: "public_weddings#live", as: :guest_live
     post "/rsvp", to: "public_weddings#respond", as: :guest_rsvp
   end
 end
