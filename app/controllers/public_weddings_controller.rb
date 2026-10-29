@@ -8,6 +8,10 @@ class PublicWeddingsController < ApplicationController
     @rsvp = @wedding.rsvps.new
   end
 
+  def live
+    @live_mock = true
+  end
+
   def respond
     unless @wedding.accepting_rsvps?
       redirect_to guest_root_path(anchor: "rsvp"), alert: "RSVPs are now closed. Please contact the couple or planner."

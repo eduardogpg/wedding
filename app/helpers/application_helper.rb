@@ -17,7 +17,9 @@ module ApplicationHelper
       "image" => '<rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8" cy="8" r="1.5"/><path d="m21 15-5-5L4 21"/>',
       "download" => '<path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>',
       "copy" => '<rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 8V3H3v13h5"/>',
-      "clock" => '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'
+      "clock" => '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+      "camera" => '<path d="M14.5 4h-5L7 7H3a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1h-4l-2.5-3Z"/><circle cx="12" cy="13" r="4"/>',
+      "book" => '<path d="M12 5C9 3 5 3 2 4v15c3-1 7-1 10 1 3-2 7-2 10-1V4c-3-1-7-1-10 1Zm0 0v15M5 8h4M5 12h4M15 8h4M15 12h4"/>'
     }
     content_tag(:svg, paths.fetch(name, paths["heart"]).html_safe,
       width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor",

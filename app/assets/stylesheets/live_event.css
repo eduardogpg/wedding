@@ -1,0 +1,148 @@
+.wedding-page.live-event-page { background: #fcfbf6; padding-bottom: 0; }
+.live-experience { min-height: 100dvh; }
+.live-demo-banner { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 32px; background: var(--theme-pale); color: var(--theme-deep); font-size: 8px; letter-spacing: 1.4px; }
+.live-demo-banner span:last-child { font-size: 9px; letter-spacing: 0; opacity: .75; }
+.live-header { display: flex; align-items: center; justify-content: space-between; gap: 20px; max-width: 1100px; margin: auto; padding: 27px 40px; border-bottom: 1px solid #e5e5da; }
+.live-header .guest-monogram { font-size: 27px; }
+.live-badge { display: inline-flex; align-items: center; gap: 7px; font-size: 10px; color: var(--theme-deep); }
+.live-badge > span { display: block; width: 6px; height: 6px; border-radius: 50%; background: #7a9666; box-shadow: 0 0 0 4px #7a966612; }
+.live-main { max-width: 1000px; margin: auto; padding: 0 40px 10px; }
+.live-welcome { text-align: center; position: relative; padding: 55px 0 38px; }
+.live-welcome-art { position: absolute; width: 245px; right: -36px; top: -20px; color: var(--theme-accent); opacity: .15; overflow: hidden; pointer-events: none; }
+.live-welcome-art .botanical { width: 100%; height: 290px; }
+.live-eyebrow { display: block; font-size: 8px; font-weight: 500; letter-spacing: 2px; color: var(--theme-accent); line-height: 1.8; }
+.live-welcome h1 { position: relative; font: 60px/1.04 var(--wedding-serif); letter-spacing: -1.9px; margin: 18px 0; }
+.live-welcome h1 em { font-weight: 400; color: var(--theme-accent); }
+.live-couple { position: relative; font-size: 12px; color: var(--theme-accent); margin-bottom: 13px; line-height: 1.8; overflow-wrap: anywhere; }
+.live-couple strong { display: inline; font-weight: 500; color: var(--theme-deep); }
+.live-intro { position: relative; color: var(--theme-accent); font-size: 12px; line-height: 1.9; margin-bottom: 0; }
+.live-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+.live-action { appearance: none; position: relative; padding: 30px; border-radius: 12px; border: 1px solid var(--theme-pale); background: var(--theme-soft); text-align: left; color: var(--theme-deep); display: flex; flex-direction: column; gap: 23px; cursor: pointer; overflow: hidden; transition: transform .18s, box-shadow .18s; }
+.live-action:hover { transform: translateY(-3px); box-shadow: 0 12px 35px #2939310b; }
+.live-action:focus-visible { outline: 3px solid var(--theme-accent); outline-offset: 5px; }
+.live-action-wishes { background: #f8eee7; border-color: #eddfd3; }
+.live-action-icon { width: 58px; height: 58px; border-radius: 15px; background: var(--theme-pale); color: var(--theme-deep); display: inline-grid; place-items: center; flex-shrink: 0; }
+.live-action-wishes .live-action-icon { background: #edddd0; color: #9a7760; }
+.live-action-copy { display: flex; flex-direction: column; min-width: 0; }
+.live-action-kicker { font-size: 7px; letter-spacing: 1.5px; line-height: 1.8; color: var(--theme-accent); }
+.live-action-wishes .live-action-kicker { color: #a58a73; }
+.live-action-copy > strong { font: 32px/1.12 var(--wedding-serif); letter-spacing: -.8px; margin: 9px 0 14px; }
+.live-action-copy > span:not([class]) { font-size: 11px; line-height: 1.9; color: var(--theme-accent); }
+.live-action-wishes .live-action-copy > span:not([class]) { color: #9d8774; }
+.live-action-prompt { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 10px; margin-top: 25px; padding-top: 19px; border-top: 1px solid #dce3d2; line-height: 1.8; }
+.live-action-wishes .live-action-prompt { border-color: #e5d7ca; color: #8f6e56; }
+.live-card-number { position: absolute; top: 30px; right: 28px; font: italic 23px var(--wedding-serif); opacity: .3; }
+.live-little-note { display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--theme-accent); font-size: 10px; margin: 24px 0 35px; }
+.live-event-details { max-width: 650px; margin: 0 auto; border-top: 1px solid #e1e4d7; border-bottom: 1px solid #e1e4d7; }
+.live-event-details summary { list-style: none; display: flex; align-items: center; gap: 10px; padding: 19px 2px; font-size: 11px; cursor: pointer; }
+.live-event-details summary::-webkit-details-marker { display: none; }
+.live-event-details summary > span { margin-left: auto; font-size: 20px; color: var(--theme-accent); transition: transform .18s; }
+.live-event-details[open] summary > span { transform: rotate(45deg); }
+.live-event-details-content { padding: 4px 2px 19px; }
+.live-event-details-content article { display: flex; gap: 25px; border-top: 1px solid #e9ebdf; padding: 22px 0; }
+.live-event-time { min-width: 60px; color: var(--theme-accent); font-size: 11px; }
+.live-event-details-content h3 { font: 23px var(--wedding-serif); margin: 0 0 8px; }
+.live-event-details-content p { color: var(--theme-accent); font-size: 11px; line-height: 1.9; overflow-wrap: anywhere; }
+.live-event-details-content .text-link { color: var(--theme-deep); font-size: 10px; }
+.live-details-timezone { margin-bottom: 0; font-size: 9px !important; }
+.live-invitation-link { display: table; margin: 24px auto 0; padding: 10px; font-size: 10px; color: var(--theme-accent); text-decoration: underline; text-underline-offset: 5px; }
+.live-footer { text-align: center; padding: 34px 20px; }
+.live-footer > span { display: block; font: italic 24px var(--wedding-serif); overflow-wrap: anywhere; }
+.live-footer small { display: block; font-size: 6px; letter-spacing: 1.8px; color: var(--theme-accent); margin-top: 14px; }
+.live-event-page:has(.live-dialog[open]) { overflow: hidden; }
+.live-dialog { max-width: 540px; width: calc(100% - 36px); max-height: calc(100dvh - 48px); margin: auto; padding: 0; border: 1px solid #e3e5d8; border-radius: 17px; background: #fcfbf6; color: var(--theme-deep); overflow-y: auto; overscroll-behavior: contain; box-shadow: 0 24px 90px #2130252b; }
+.live-dialog::backdrop { background: #24372d80; backdrop-filter: blur(5px); }
+.live-dialog-content { position: relative; padding: 38px; }
+.live-dialog-close { position: absolute; top: 13px; right: 13px; width: 40px; height: 40px; border-radius: 50%; background: #f1f2e9; border: 1px solid #e0e3d4; color: var(--theme-accent); font-size: 25px; line-height: 1; }
+.live-dialog-close:hover { background: var(--theme-pale); }
+.live-dialog-symbol { display: inline-flex; margin-bottom: 21px; padding: 14px; background: var(--theme-pale); border-radius: 13px; }
+.live-wish-dialog .live-dialog-symbol { background: #edddd0; color: #9a7760; }
+.live-dialog h2 { font: 34px/1.1 var(--wedding-serif); letter-spacing: -.9px; margin: 12px 0; max-width: 360px; }
+.live-dialog-intro { color: var(--theme-accent); font-size: 12px; line-height: 1.8; margin-bottom: 27px; }
+.live-dialog .field label { font-size: 12px; color: var(--theme-deep); }
+.live-dialog .field label span { font-size: 10px; color: var(--theme-accent); }
+.live-dialog .field input, .live-dialog .field textarea { background: #fffef9; color: var(--theme-deep); border-color: #dfe2d4; }
+.live-dialog .field input::placeholder, .live-dialog .field textarea::placeholder { color: var(--theme-accent); opacity: .7; }
+.live-primary-button { background: var(--theme-deep); color: #fff; border-color: var(--theme-deep); min-height: 46px; font-size: 12px; }
+.live-primary-button:hover:not(:disabled) { background: var(--theme-accent); border-color: var(--theme-accent); }
+.live-primary-button:disabled { opacity: .4; cursor: default; transform: none; }
+.live-secondary-button { background: transparent; color: var(--theme-deep); border-color: #ccd5c0; min-height: 46px; font-size: 12px; }
+.live-secondary-button:hover { background: var(--theme-pale); }
+.live-photo-picker { padding: 26px 15px; background: var(--theme-soft); border: 1px dashed #c7d0b9; border-radius: 9px; text-align: center; color: var(--theme-accent); }
+.live-photo-picker > p { font-size: 11px; line-height: 1.8; margin: 15px 0 18px; }
+.live-photo-picker > small { display: block; font-size: 9px; margin-top: 17px; line-height: 1.8; }
+.live-picker-buttons { display: flex; align-items: center; justify-content: center; gap: 9px; flex-wrap: wrap; }
+.live-selected-photos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 19px; }
+.live-photo-tile { position: relative; border-radius: 7px; background: var(--theme-pale); overflow: hidden; }
+.live-photo-tile img { display: block; width: 100%; height: 110px; object-fit: cover; }
+.live-photo-tile button { position: absolute; right: 3px; top: 3px; width: 34px; height: 34px; border: 0; border-radius: 50%; background: #fffef4ef; color: var(--theme-deep); font-size: 22px; box-shadow: 0 2px 8px #25352a12; }
+.live-photo-count { color: var(--theme-accent); font-size: 10px; margin: 14px 0 22px; }
+.live-photo-error { background: #f9eae2; border: 1px solid #ebcaba; border-radius: 6px; padding: 11px; color: #984e3c; font-size: 11px; line-height: 1.8; margin: 16px 0 0; }
+.live-demo-note { color: #7e876f; font-size: 10px; text-align: center; line-height: 1.8; margin: 17px 0 0; }
+.live-character-count { align-self: flex-end; color: var(--theme-accent); font-size: 10px; }
+.live-dialog .live-notepaper { background: repeating-linear-gradient(#fffef9, #fffef9 31px, #e8e5d9 31px, #e8e5d9 32px); line-height: 32px; padding-top: 6px; font-family: var(--wedding-serif); font-size: 18px; }
+.live-thank-you { text-align: center; padding: 10px 0 5px; }
+.live-success-icon { width: 70px; height: 70px; margin: 0 auto 24px; border-radius: 50%; display: grid; place-items: center; background: var(--theme-pale); color: var(--theme-deep); }
+.live-thank-you h3 { font: 32px/1.15 var(--wedding-serif); letter-spacing: -.6px; margin-bottom: 18px; }
+.live-thank-you > p:not(.live-demo-note) { color: var(--theme-accent); font-size: 12px; line-height: 1.9; }
+.live-thank-you > .button { margin-top: 26px; }
+.live-wish-preview { padding: 24px; margin: 24px 0 0; background: #f7f1e7; border: 1px solid #e9decd; border-radius: 7px; text-align: left; }
+.live-wish-preview p { font: italic 20px/1.7 var(--wedding-serif); white-space: pre-wrap; overflow-wrap: anywhere; }
+.live-wish-preview cite { display: block; font-size: 12px; color: var(--theme-accent); font-style: normal; overflow-wrap: anywhere; }
+
+@media (max-width: 600px) {
+  .live-demo-banner { justify-content: center; padding: 9px 15px; font-size: 7px; letter-spacing: 1px; }
+  .live-demo-banner span:last-child { display: none; }
+  .live-header { padding: 19px 22px; }
+  .live-header .guest-monogram { font-size: 23px; }
+  .live-badge { font-size: 9px; }
+  .live-main { padding: 0 20px 5px; }
+  .live-welcome { padding: 30px 0 26px; }
+  .live-welcome-art { width: 145px; right: -20px; top: 0; opacity: .12; }
+  .live-welcome-art .botanical { height: 200px; }
+  .live-welcome h1 { font-size: 43px; letter-spacing: -1.2px; margin: 12px 0 14px; }
+  .live-welcome .live-eyebrow { font-size: 7px; letter-spacing: 1.7px; }
+  .live-couple { font-size: 11px; margin-bottom: 10px; }
+  .live-couple strong { display: block; font-size: 15px; margin-top: 1px; }
+  .live-intro { font-size: 12px; line-height: 1.8; max-width: 310px; margin-inline: auto; }
+  .live-desktop-break { display: none; }
+  .live-actions { grid-template-columns: minmax(0, 1fr); gap: 13px; }
+  .live-action { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 15px; padding: 21px 18px; border-radius: 11px; }
+  .live-action-icon { width: 44px; height: 44px; border-radius: 12px; margin-top: 4px; }
+  .live-action-icon svg { width: 23px; height: 23px; }
+  .live-action-kicker { font-size: 6.5px; letter-spacing: 1px; padding-right: 12px; }
+  .live-action-copy > strong { font-size: 27px; letter-spacing: -.7px; margin: 7px 0 9px; }
+  .live-action-copy > span:not([class]) { font-size: 11px; line-height: 1.7; }
+  .live-action-copy > span:not([class]) br { display: none; }
+  .live-action-prompt { font-size: 9px; line-height: 1.7; margin-top: 14px; padding-top: 12px; gap: 8px; }
+  .live-action-prompt svg { width: 15px; height: 15px; }
+  .live-card-number { top: 15px; right: 15px; font-size: 15px; }
+  .live-little-note { font-size: 9px; margin: 22px 0 26px; }
+  .live-footer { padding-top: 25px; }
+  .live-dialog { width: calc(100% - 24px); max-height: calc(100dvh - 24px - env(safe-area-inset-bottom, 0px)); border-radius: 15px; }
+  .live-dialog-content { padding: 29px 23px; }
+  .live-dialog-close { width: 44px; height: 44px; top: 9px; right: 9px; }
+  .live-dialog-symbol { padding: 12px; margin-bottom: 18px; }
+  .live-dialog h2 { font-size: 32px; max-width: 260px; }
+  .live-dialog .live-eyebrow { font-size: 7px; max-width: calc(100% - 5px); letter-spacing: 1.3px; }
+  .live-dialog-intro { font-size: 12px; }
+  .live-photo-picker { padding: 22px 10px; }
+  .live-picker-buttons .button { font-size: 11px; padding: 12px; gap: 7px; }
+  .live-photo-picker > small { font-size: 9px; }
+  .live-photo-tile img { height: 90px; }
+  .live-photo-tile button { width: 40px; height: 40px; }
+  .live-dialog .field input, .live-dialog .field textarea { font-size: 16px; }
+  .live-dialog .live-notepaper { font-size: 18px; }
+  .live-dialog .field label { font-size: 13px; }
+  .live-wish-preview { padding: 20px; }
+}
+
+@media (max-width: 360px) {
+  .live-main { padding-inline: 16px; }
+  .live-welcome-art { right: -16px; }
+  .live-welcome h1 { font-size: 39px; }
+  .live-action { padding: 19px 15px; grid-template-columns: 36px minmax(0, 1fr); gap: 12px; }
+  .live-action-icon { width: 36px; height: 40px; }
+  .live-action-copy > strong { font-size: 25px; }
+  .live-dialog-content { padding-inline: 19px; }
+}

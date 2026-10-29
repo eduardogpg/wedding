@@ -67,8 +67,13 @@ class WeddingsController < PlannerController
 
   def preview
     @preview = true
-    @rsvp = @wedding.rsvps.new
-    render "public_weddings/show", layout: "wedding"
+    if params[:phase] == "live"
+      @live_mock = true
+      render "public_weddings/live", layout: "wedding"
+    else
+      @rsvp = @wedding.rsvps.new
+      render "public_weddings/show", layout: "wedding"
+    end
   end
 
   def publish

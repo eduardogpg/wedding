@@ -1,0 +1,6 @@
+<nav class="mobile-wedding-nav" aria-label="Quick wedding links">
+  <a href="#home"><%= icon "heart", size: 19 %><span>Invitation</span></a>
+  <a href="#celebration"><%= icon "pin", size: 19 %><span>Schedule & maps</span></a>
+  <% if wedding.gallery_photos.attached? %><a href="#moments"><%= icon "image", size: 19 %><span>Photos</span></a><% end %>
+  <a href="#rsvp"><%= icon "users", size: 19 %><span>RSVP</span></a>
+</nav>

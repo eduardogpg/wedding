@@ -32,7 +32,8 @@ The database has no host port. Nothing is published online.
 1. Sign in and open Eduardo & Raquel.
 2. Choose **Edit wedding** to change names, dates, invitation text, and their story.
 3. Add ceremony and reception events, including local times, venues, and maps.
-4. Upload a cover and gallery photos, and choose one of three palettes.
+4. Upload a cover and multiple gallery photos, choose carousel or grid display,
+   and select one of three palettes.
 5. Preview the page, then publish and share its local subdomain.
 6. Open the public page and submit an RSVP. View responses and export CSV in the dashboard.
 
@@ -42,6 +43,53 @@ Sofía & Daniel and Valentina & Andrés start as drafts. Draft subdomains return
 RSVPs accept a maximum party of 10, one response per email per wedding. The
 optional deadline closes responses after that date. All responses close after
 the wedding date. Responses are stored locally; no emails are sent.
+
+## Live event mock
+
+On branch `codex/live-wedding-mock`, try the Spanish live-wedding experience at
+<http://eduardo-and-raquel.localhost:3001/fiesta>. The planner also has a
+**Preview live event** button; signed-in planners can preview drafts.
+
+The mock presents two main actions: **Subir fotos** and **Dejar buenos deseos**.
+You can choose photos to see local thumbnails, remove selections, write a wish,
+and try the confirmation screens. All interactions use temporary browser memory.
+The mock makes no uploads or submissions and stores no photos or messages.
+It does not change wedding dates or automatically switch the invitation’s phase.
+
+The normal invitation remains at `/`; `/fiesta` is an explicit mock route.
+
+## Photo carousel and venue maps
+
+In **Edit wedding → Photos & style**, choose **Photo carousel** under **Gallery
+display** and select multiple images in **Gallery / carousel photos**. Guests
+can use previous/next arrows, photo dots, keyboard arrows, or swipe. There is no
+automatic rotation. A single photo displays without navigation; the **Photo
+grid** option retains the original gallery layout.
+
+Each schedule event has a **Show Google Maps on the wedding page** checkbox.
+The default map searches using its venue name and address. To select an exact
+pin, open the venue in Google Maps, choose **Share → Embed a map → Copy HTML**,
+and paste it into **Google Maps embed code or URL**. This follows [Google’s map
+sharing instructions](https://support.google.com/maps/answer/7101463?hl=en).
+Only a Google Maps embed source URL is retained from pasted HTML. Maps load
+when guests scroll to them, and the external **Open in Google Maps** link remains
+available when an embedded map is hidden. Map display requires internet access.
+
+## Phone layout and reminder ideas
+
+The guest page has a phone navigation bar with shortcuts to the invitation,
+schedule/maps, photos (when available), and RSVP. Form inputs use 16 px text,
+and the navigation bar hides while a guest is editing their RSVP. Safe-area
+spacing keeps the navigation clear of the phone’s home indicator.
+
+Responsive browser checks on October 27, 2026 covered widths of 320, 375, 390,
+and 430 px, with long partner names and 20 carousel photos. Each page stayed
+within its viewport width. RSVP navigation and form focus were also checked.
+These are browser viewport checks, rather than tests on physical phones.
+
+Guest reminders are planned in [IDEAS.md](IDEAS.md), including RSVP reminders,
+wedding-day directions, and photo upload prompts. That backlog records push
+permission, iPhone Home Screen setup, email alternatives, and server scheduling.
 
 ## Configuration
 

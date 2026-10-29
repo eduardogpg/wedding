@@ -15,10 +15,13 @@ Couples and guests use public wedding subdomains and do not have accounts.
 - Wedding dashboard with search, upcoming dates, and publication filters.
 - Wedding creation and editing, unique subdomains, invitation text, colors,
   dress code, and an RSVP deadline.
-- Ceremony, reception, and other schedule events, each with venue and map details.
-- Cover and gallery photo uploads, with removal controls.
+- Ceremony, reception, and other schedule events, each with venue details,
+  optional embedded Google Maps, and an external map link.
+- Cover and gallery photo uploads, with removal controls and a carousel/grid
+  display option. Carousels support arrows, dots, keyboard navigation, and swipe.
 - Private preview, draft/published states, and public wedding pages.
 - Guest RSVP collection and a planner response list with CSV export.
+- Phone layouts with quick navigation, larger form fields, and safe-area spacing.
 - Docker Compose with PostgreSQL and persistent database and upload volumes.
 
 ## Boundaries
@@ -34,3 +37,5 @@ Couples and guests use public wedding subdomains and do not have accounts.
 
 Custom domains, multiple planner accounts, guest lists and invitation codes,
 additional page templates, vendors, budgets, reminders, and production hosting.
+Further concepts, including optional guest notifications, are recorded in
+[`IDEAS.md`](../IDEAS.md).

@@ -10,7 +10,7 @@ class Wedding < ApplicationRecord
   has_one_attached :cover_photo
   has_many_attached :gallery_photos
   accepts_nested_attributes_for :events, allow_destroy: true,
-    reject_if: ->(attrs) { attrs.except("id", "_destroy", "position", "show_map").values.all?(&:blank?) }
+    reject_if: ->(attrs) { attrs["id"].blank? && attrs.except("id", "_destroy", "position", "show_map").values.all?(&:blank?) }
 
   enum :status, { draft: 0, published: 1 }, default: :draft
   normalizes :subdomain, with: ->(value) { value.strip.downcase }
