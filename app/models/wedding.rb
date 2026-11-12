@@ -1,3 +1,32 @@
+# == Schema Information
+#
+# Table name: weddings
+#
+#  id                    :bigint           not null, primary key
+#  celebration_starts_at :datetime
+#  dress_code            :string
+#  gallery_layout        :string           default("carousel"), not null
+#  headline              :string           default("Juntos es un lugar hermoso.")
+#  invitation_text       :text             not null
+#  landing_mode          :integer          default("automatic"), not null
+#  page_template         :string           default("botanical"), not null
+#  partner_one           :string           not null
+#  partner_two           :string           not null
+#  rsvp_deadline         :date
+#  status                :integer          default("draft"), not null
+#  story                 :text
+#  subdomain             :string           not null
+#  theme                 :string           default("sage"), not null
+#  timezone              :string           default("Mexico City"), not null
+#  wedding_date          :date             not null
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#
+# Indexes
+#
+#  index_weddings_on_subdomain     (subdomain) UNIQUE
+#  index_weddings_on_wedding_date  (wedding_date)
+#
 class Wedding < ApplicationRecord
   RESERVED_SUBDOMAINS = %w[app www admin api mail support assets localhost dashboard].freeze
   PHOTO_TYPES = %w[image/jpeg image/png image/webp].freeze

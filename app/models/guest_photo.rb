@@ -1,3 +1,22 @@
+# == Schema Information
+#
+# Table name: guest_photos
+#
+#  id         :bigint           not null, primary key
+#  caption    :text
+#  guest_name :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  wedding_id :bigint           not null
+#
+# Indexes
+#
+#  index_guest_photos_on_wedding_id  (wedding_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (wedding_id => weddings.id)
+#
 class GuestPhoto < ApplicationRecord
   belongs_to :wedding
   has_many_attached :images

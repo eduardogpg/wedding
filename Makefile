@@ -6,7 +6,7 @@ COMPOSE ?= docker compose
 # Keep setup, database preparation, and service changes in order under make -j.
 .NOTPARALLEL:
 .PHONY: help env check-docker db-up setup run up build stop down restart logs status \
-	db-prepare db-migrate db-seed test check console shell
+	db-prepare db-migrate db-seed test check console shell annotate
 
 help: ## Show the available local development commands.
 	@awk 'BEGIN {FS = ":.*## "; printf "\nBoda local development\n\n"} /^[a-zA-Z_-]+:.*## / {printf "  make %-14s %s\n", $$1, $$2} END {printf "\nFirst run: make setup\n\n"}' $(MAKEFILE_LIST)
@@ -78,3 +78,5 @@ shell: db-up ## Open an interactive shell in the Rails container.
 
 migrate: db-up ## Apply pending development database migrations.
 	$(COMPOSE) run --rm --no-deps --build web bin/rails db:migrate
+annotate: db-up ## Actualizar las anotaciones de columnas, tipos e índices en los modelos.
+	$(COMPOSE) run --rm --no-deps --build -T web bundle exec annotaterb models

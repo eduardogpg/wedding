@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: gift_registries
+#
+#  id         :bigint           not null, primary key
+#  position   :integer          default(0), not null
+#  store_name :string           not null
+#  url        :string           not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  wedding_id :bigint           not null
+#
+# Indexes
+#
+#  index_gift_registries_on_wedding_id  (wedding_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (wedding_id => weddings.id)
+#
 class GiftRegistry < ApplicationRecord
   belongs_to :wedding, inverse_of: :gift_registries
 

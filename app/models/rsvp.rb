@@ -1,3 +1,26 @@
+# == Schema Information
+#
+# Table name: rsvps
+#
+#  id         :bigint           not null, primary key
+#  attendance :integer          not null
+#  email      :string           not null
+#  guest_name :string           not null
+#  message    :text
+#  party_size :integer          default(1), not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  wedding_id :bigint           not null
+#
+# Indexes
+#
+#  index_rsvps_on_wedding_id            (wedding_id)
+#  index_rsvps_on_wedding_id_and_email  (wedding_id,email) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (wedding_id => weddings.id)
+#
 class Rsvp < ApplicationRecord
   belongs_to :wedding
   enum :attendance, { attending: 0, declined: 1 }, validate: true

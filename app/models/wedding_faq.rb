@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: wedding_faqs
+#
+#  id         :bigint           not null, primary key
+#  answer     :text             not null
+#  question   :string           not null
+#  visible    :boolean          default(TRUE), not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  wedding_id :bigint           not null
+#
+# Indexes
+#
+#  index_wedding_faqs_on_wedding_id  (wedding_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (wedding_id => weddings.id)
+#
 class WeddingFaq < ApplicationRecord
   belongs_to :wedding, inverse_of: :faqs
 

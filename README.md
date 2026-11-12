@@ -234,3 +234,20 @@ también su respuesta. Todas las bodas existentes comienzan sin preguntas.
 Las respuestas aparecen en un acordeón accesible en las tres plantillas, con
 un acceso **Dudas** en teléfonos. También están disponibles en la invitación
 original cuando la boda ya muestra la página de la fiesta.
+
+## Atributos de los modelos
+
+Usamos [AnnotateRb](https://github.com/drwl/annotaterb) solo en desarrollo para
+mostrar las columnas, tipos, valores predeterminados, índices y claves foráneas
+al inicio de cada modelo de Active Record. Los comentarios se actualizan
+automáticamente después de las migraciones de desarrollo.
+
+Para regenerarlos manualmente con Docker:
+
+```sh
+make annotate
+```
+
+La configuración está en `.annotaterb.yml`. Solo se anotan los modelos; las
+pruebas, fixtures y rutas quedan fuera de la generación. Las anotaciones se
+generan desde el esquema de la base de datos, sin modificar sus registros.

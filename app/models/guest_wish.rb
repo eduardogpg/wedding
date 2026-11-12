@@ -1,3 +1,22 @@
+# == Schema Information
+#
+# Table name: guest_wishes
+#
+#  id         :bigint           not null, primary key
+#  body       :text             not null
+#  guest_name :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  wedding_id :bigint           not null
+#
+# Indexes
+#
+#  index_guest_wishes_on_wedding_id  (wedding_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (wedding_id => weddings.id)
+#
 class GuestWish < ApplicationRecord
   belongs_to :wedding
 

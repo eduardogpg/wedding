@@ -1,3 +1,29 @@
+# == Schema Information
+#
+# Table name: events
+#
+#  id            :bigint           not null, primary key
+#  address       :text
+#  map_embed_url :text
+#  map_url       :string
+#  notes         :text
+#  position      :integer          default(0), not null
+#  show_map      :boolean          default(TRUE), not null
+#  starts_at     :datetime         not null
+#  title         :string           not null
+#  venue_name    :string           not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  wedding_id    :bigint           not null
+#
+# Indexes
+#
+#  index_events_on_wedding_id  (wedding_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (wedding_id => weddings.id)
+#
 class Event < ApplicationRecord
   GOOGLE_MAP_HOSTS = %w[www.google.com google.com maps.google.com].freeze
 
