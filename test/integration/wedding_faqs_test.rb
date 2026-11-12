@@ -58,7 +58,7 @@ class WeddingFaqsTest < ActionDispatch::IntegrationTest
     wedding = create_wedding
     patch wedding_path(wedding), params: { wedding: { faqs_attributes: { "0" => { question: "¿Habrá transporte?", answer: "" } } } }
     assert_response :unprocessable_entity
-    assert_select ".error-summary"
+    assert_select ".error-summary", /Respuesta de la pregunta frecuente/
     assert_select "input[value='¿Habrá transporte?']"
     assert_empty wedding.faqs.reload
   end

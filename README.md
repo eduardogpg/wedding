@@ -219,3 +219,18 @@ need a real domain, wildcard DNS and HTTPS, private credentials, storage backups
 and production web/worker configuration.
 
 See [first-version scope](docs/first-version.md) for the initial product boundaries.
+
+## Preguntas frecuentes opcionales
+
+En **Editar boda → Para los invitados**, usa **Agregar pregunta** para escribir
+una pregunta y su respuesta. Guarda los cambios con **Guardar boda** o
+**Guardar y ver**. Puedes agregar las que necesites, editar y quitar preguntas.
+
+La casilla **Mostrar esta pregunta en la invitación** permite ocultarla sin
+borrarla. Sin preguntas visibles, no se muestra la sección ni sus enlaces. Las
+filas nuevas completamente vacías se ignoran; una pregunta empezada necesita
+también su respuesta. Todas las bodas existentes comienzan sin preguntas.
+
+Las respuestas aparecen en un acordeón accesible en las tres plantillas, con
+un acceso **Dudas** en teléfonos. También están disponibles en la invitación
+original cuando la boda ya muestra la página de la fiesta.

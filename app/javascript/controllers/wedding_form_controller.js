@@ -5,7 +5,7 @@ export default class extends Controller {
 
   connect() {
     this.subdomainEdited = this.subdomainTarget.dataset.autoSuggest !== "true"
-    this.nextEvent = 0
+    this.nextIndex = Date.now()
   }
 
   suggestSubdomain() {
@@ -17,7 +17,7 @@ export default class extends Controller {
   markSubdomainEdited() { this.subdomainEdited = true }
 
   addEvent() {
-    const key = `new_${Date.now()}_${this.nextEvent++}`
+    const key = this.nextKey()
     this.eventsTarget.insertAdjacentHTML("beforeend", this.eventTemplateTarget.innerHTML.replaceAll("NEW_EVENT", key))
     this.eventsTarget.lastElementChild.querySelector('input[type="text"]').focus()
   }
@@ -27,7 +27,7 @@ export default class extends Controller {
   }
 
   addRegistry() {
-    const key = `new_${Date.now()}_${this.nextEvent++}`
+    const key = this.nextKey()
     this.registriesTarget.insertAdjacentHTML("beforeend", this.registryTemplateTarget.innerHTML.replaceAll("NEW_REGISTRY", key))
     this.registriesTarget.lastElementChild.querySelector("input[type='text']").focus()
   }
@@ -37,9 +37,14 @@ export default class extends Controller {
   }
 
   addFaq() {
-    const key = `new_${Date.now()}_${this.nextEvent++}`
+    const key = this.nextKey()
     this.faqsTarget.insertAdjacentHTML("beforeend", this.faqTemplateTarget.innerHTML.replaceAll("NEW_FAQ", key))
     this.faqsTarget.lastElementChild.querySelector("input[type=text]").focus()
+  }
+
+  nextKey() {
+    this.nextIndex += 1
+    return String(this.nextIndex)
   }
 
   removeFaq(event) {

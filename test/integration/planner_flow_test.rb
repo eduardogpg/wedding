@@ -92,8 +92,8 @@ class PlannerFlowTest < ActionDispatch::IntegrationTest
     assert_equal 0, wedding.reload.gift_registries.count
 
     patch wedding_path(wedding), params: { wedding: { gift_registries_attributes: {
-      "0" => { store_name: "Liverpool", url: "https://mesaderegalos.liverpool.com.mx/ejemplo" },
-      "1" => { store_name: "El Palacio de Hierro", url: "https://www.elpalaciodehierro.com/mesa" }
+      "1794524402409" => { store_name: "Liverpool", url: "https://mesaderegalos.liverpool.com.mx/ejemplo" },
+      "1794524402410" => { store_name: "El Palacio de Hierro", url: "https://www.elpalaciodehierro.com/mesa" }
     } } }
     assert_redirected_to wedding_path(wedding)
     assert_equal [ "El Palacio de Hierro", "Liverpool" ], wedding.reload.gift_registries.map(&:store_name).sort

@@ -10,3 +10,5 @@
 .guest-faq summary::marker { color: var(--theme-accent); font-size: 14px; }
 .guest-faq .guest-prose { padding: 0 8px 12px; white-space: normal; }
 @media (max-width: 600px) { .guest-faq summary { font-size: 20px; } }
+
+.guest-nav nav { flex-wrap: wrap; justify-content: flex-end; }

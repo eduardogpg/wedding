@@ -68,6 +68,9 @@ es:
         gallery_photos: "Fotos"
         cover_photo: "Foto de portada"
         base: ""
+      wedding/faqs:
+        question: "Pregunta frecuente"
+        answer: "Respuesta de la pregunta frecuente"
       wedding_faq:
         question: "Pregunta"
         answer: "Respuesta"
