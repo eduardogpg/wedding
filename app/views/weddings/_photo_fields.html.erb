@@ -1,0 +1,33 @@
+<div class="field upload-field" data-controller="photo-picker" data-photo-picker-max-value="1">
+  <%= form.label :cover_photo, "Foto de portada" %>
+  <% if (blob = retained_photo_blob(wedding.cover_photo)) %>
+    <% if wedding.cover_photo.persisted? %>
+      <div class="current-cover"><%= image_tag blob.variant(resize_to_limit: [600, 350]), alt: "Portada actual" %><label class="checkbox-label"><%= check_box_tag "wedding[remove_cover_photo]", "1" %> Quitar la portada actual</label></div>
+    <% else %>
+      <div class="pending-photo current-cover" data-pending-photo><%= form.hidden_field :cover_photo, value: blob.signed_id %><%= image_tag blob.variant(resize_to_limit: [600, 350]), alt: "Portada seleccionada" %><span>Portada elegida · lista para guardar</span><button type="button" class="text-button" data-action="photo-picker#removePending">Quitar la portada elegida</button></div>
+    <% end %>
+  <% end %>
+  <%= form.file_field :cover_photo, accept: "image/jpeg,image/png,image/webp", direct_upload: true, data: { direct_upload_url: photo_uploads_path, photo_picker_target: "input", action: "change->photo-picker#selected direct-upload:initialize->photo-picker#started direct-upload:progress->photo-picker#progress direct-upload:end->photo-picker#finished direct-upload:error->photo-picker#failed" } %>
+  <small>JPEG, PNG o WebP · Hasta 10 MB. Sin portada, se usa la primera foto de la galería.</small>
+  <div class="photo-selection-previews" data-photo-picker-target="previews"></div><p class="photo-upload-status" data-photo-picker-target="status" role="status" aria-live="polite"></p>
+</div>
+
+<div class="field"><%= form.label :gallery_layout, "Presentación de las fotos" %><%= form.select :gallery_layout, Wedding::GALLERY_LAYOUTS.map { |value, label| [label, value] } %><small>Usa un carrusel para deslizar o muestra todas las fotos en una cuadrícula.</small></div>
+<div class="field upload-field" data-controller="photo-picker" data-photo-picker-max-value="20" data-photo-picker-multiple-value="true" data-photo-picker-existing-value="<%= wedding.gallery_photos.size %>">
+  <%= form.label :gallery_photos, "Fotos de la galería o el carrusel" %>
+  <%= form.file_field :gallery_photos, multiple: true, accept: "image/jpeg,image/png,image/webp", include_hidden: false, direct_upload: true, data: { direct_upload_url: photo_uploads_path, photo_picker_target: "input", action: "change->photo-picker#selected direct-upload:initialize->photo-picker#started direct-upload:progress->photo-picker#progress direct-upload:end->photo-picker#finished direct-upload:error->photo-picker#failed" } %>
+  <small>Selecciona varias fotos a la vez. Si abres el selector otra vez, se suman a las que ya elegiste. Hasta 20 en total, de 10 MB cada una. Guarda una sola vez para publicarlas.</small>
+  <div class="photo-selection-previews" data-photo-picker-target="previews"></div><p class="photo-upload-status" data-photo-picker-target="status" role="status" aria-live="polite"></p>
+  <% if wedding.gallery_photos.attached? %>
+    <div class="photo-edit-grid">
+      <% wedding.gallery_photos.each do |photo| %>
+        <% next unless (blob = retained_photo_blob(photo)) %>
+        <% if photo.persisted? %>
+          <label><%= image_tag blob.variant(resize_to_limit: [300, 300]), alt: "Foto de la galería", loading: "lazy" %><span><%= check_box_tag "wedding[remove_gallery_photo_ids][]", photo.id %> Quitar foto</span></label>
+        <% else %>
+          <div class="pending-photo" data-pending-photo><%= form.hidden_field :gallery_photos, multiple: true, value: blob.signed_id %><%= image_tag blob.variant(resize_to_limit: [300, 300]), alt: "Foto de galería elegida", loading: "lazy" %><span>Elegida · lista para guardar</span><button type="button" class="text-button" data-action="photo-picker#removePending">Quitar la foto elegida</button></div>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

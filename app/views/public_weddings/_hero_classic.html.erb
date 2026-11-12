@@ -1,0 +1,13 @@
+<section class="wedding-hero classic-hero" id="home">
+  <div class="classic-invitation hero-copy">
+    <span class="classic-ornament" aria-hidden="true">✧</span>
+    <span class="eyebrow">JUNTO CON SUS FAMILIAS</span>
+    <h1><span><%= wedding.partner_one %></span><em>y</em><span><%= wedding.partner_two %></span></h1>
+    <p class="classic-request">tienen el gusto de invitarte<br>a celebrar su matrimonio</p>
+    <div class="classic-date"><span><%= l(wedding.wedding_date, format: "%B") %></span><strong><%= wedding.wedding_date.day %></strong><span><%= wedding.wedding_date.year %></span></div>
+    <p class="hero-headline"><%= wedding.headline %></p>
+    <a href="#rsvp" class="button wedding-button">Confirmar asistencia <%= icon "arrow", size: 17 %></a>
+    <span class="classic-ornament classic-ornament-bottom" aria-hidden="true">✧</span>
+  </div>
+  <% if wedding.hero_photo.present? %><div class="classic-portrait"><%= image_tag wedding.hero_photo.variant(resize_to_limit: [1400, 1000]), alt: "#{wedding.couple_names}, celebrando su boda", class: "hero-photo" %><span>Una vida de momentos, que empieza aquí.</span></div><% end %>
+</section>

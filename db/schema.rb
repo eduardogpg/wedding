@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_27_000100) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_12_200000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -58,6 +58,34 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_27_000100) do
     t.index ["wedding_id"], name: "index_events_on_wedding_id"
   end
 
+  create_table "gift_registries", force: :cascade do |t|
+    t.bigint "wedding_id", null: false
+    t.string "store_name", null: false
+    t.string "url", null: false
+    t.integer "position", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["wedding_id"], name: "index_gift_registries_on_wedding_id"
+  end
+
+  create_table "guest_photos", force: :cascade do |t|
+    t.bigint "wedding_id", null: false
+    t.string "guest_name"
+    t.text "caption"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["wedding_id"], name: "index_guest_photos_on_wedding_id"
+  end
+
+  create_table "guest_wishes", force: :cascade do |t|
+    t.bigint "wedding_id", null: false
+    t.string "guest_name"
+    t.text "body", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["wedding_id"], name: "index_guest_wishes_on_wedding_id"
+  end
+
   create_table "rsvps", force: :cascade do |t|
     t.bigint "wedding_id", null: false
     t.string "guest_name", null: false
@@ -79,6 +107,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_27_000100) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  create_table "wedding_faqs", force: :cascade do |t|
+    t.bigint "wedding_id", null: false
+    t.string "question", null: false
+    t.text "answer", null: false
+    t.boolean "visible", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["wedding_id"], name: "index_wedding_faqs_on_wedding_id"
+  end
+
   create_table "weddings", force: :cascade do |t|
     t.string "partner_one", null: false
     t.string "partner_two", null: false
@@ -87,7 +125,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_27_000100) do
     t.string "timezone", default: "Mexico City", null: false
     t.integer "status", default: 0, null: false
     t.string "theme", default: "sage", null: false
-    t.string "headline", default: "Together is a beautiful place to be."
+    t.string "headline", default: "Juntos es un lugar hermoso."
     t.text "invitation_text", null: false
     t.text "story"
     t.string "dress_code"
@@ -95,6 +133,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_27_000100) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "gallery_layout", default: "carousel", null: false
+    t.string "page_template", default: "botanical", null: false
+    t.datetime "celebration_starts_at"
+    t.integer "landing_mode", default: 0, null: false
     t.index ["subdomain"], name: "index_weddings_on_subdomain", unique: true
     t.index ["wedding_date"], name: "index_weddings_on_wedding_date"
   end
@@ -102,5 +143,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_27_000100) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "events", "weddings"
+  add_foreign_key "gift_registries", "weddings"
+  add_foreign_key "guest_photos", "weddings"
+  add_foreign_key "guest_wishes", "weddings"
   add_foreign_key "rsvps", "weddings"
+  add_foreign_key "wedding_faqs", "weddings"
 end

@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   layout "authentication"
   rate_limit to: 10, within: 3.minutes, only: :create,
-    with: -> { redirect_to new_session_path, alert: "Too many attempts. Please try again in a few minutes." }
+    with: -> { redirect_to new_session_path, alert: "Demasiados intentos. Vuelve a probar en unos minutos." }
 
   def new
   end
@@ -12,15 +12,15 @@ class SessionsController < ApplicationController
       reset_session
       session[:user_id] = user.id
       session[:signed_in_at] = Time.current.to_i
-      redirect_to root_path, notice: "Welcome back. Let’s make something memorable."
+      redirect_to root_path, notice: "Qué bueno verte. Vamos a preparar algo memorable."
     else
-      flash.now[:alert] = "Email or password is incorrect."
+      flash.now[:alert] = "El correo o la contraseña no son correctos."
       render :new, status: :unprocessable_entity
     end
   end
 
   def destroy
     reset_session
-    redirect_to new_session_path, notice: "You’ve signed out."
+    redirect_to new_session_path, notice: "Cerraste la sesión."
   end
 end

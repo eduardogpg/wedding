@@ -11,7 +11,7 @@ class PlannerController < ApplicationController
   def require_planner
     unless current_user
       reset_session
-      redirect_to new_session_path, alert: "Please sign in to manage your weddings."
+      redirect_to new_session_path, alert: "Entra para administrar tus bodas."
     end
   end
 end

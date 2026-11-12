@@ -1,9 +1,10 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Interactive mock only. All selected files and wishes stay in this controller's
-// memory. No upload, request, browser storage, or persistence is performed.
+// Before the celebration, selected files and wishes stay in memory.
+// Once the party page is open, persist=true sends them to the wedding.
 export default class extends Controller {
-  static targets = ["photosDialog", "wishesDialog", "photoForm", "photoDone", "photoInput", "cameraInput", "photoError", "photoPreviews", "photoCount", "photoSubmit", "photoResult", "wishForm", "wishDone", "wishName", "wishMessage", "wishCount", "wishResult", "wishSignature"]
+  static targets = ["photosDialog", "wishesDialog", "photoForm", "photoDone", "photoInput", "cameraInput", "photoError", "photoPreviews", "photoCount", "photoSubmit", "photoResult", "wishForm", "wishDone", "wishName", "wishMessage", "wishCount", "wishResult", "wishSignature", "wishError"]
+  static values = { persist: { type: Boolean, default: false }, wishUrl: String, photoUrl: String }
 
   connect() { this.photos = [] }
   disconnect() { this.photos.forEach(photo => URL.revokeObjectURL(photo.url)) }
@@ -29,7 +30,7 @@ export default class extends Controller {
     let error = ""
     if (files.some(file => !["image/jpeg", "image/png", "image/webp"].includes(file.type))) error = "Elige fotos en formato JPG, PNG o WebP."
     else if (files.some(file => file.size > 10 * 1024 * 1024)) error = "Cada foto debe pesar 10 MB o menos."
-    else if (this.photos.length + files.length > 10) error = "Puedes elegir hasta 10 fotos por envío de prueba."
+    else if (this.photos.length + files.length > 10) error = "Puedes elegir hasta 10 fotos por envío."
     this.photoErrorTarget.textContent = error
     this.photoErrorTarget.hidden = !error
     if (error) return
@@ -65,13 +66,29 @@ export default class extends Controller {
     this.renderPhotos()
   }
 
-  sharePhotos(event) {
+  async sharePhotos(event) {
     event.preventDefault()
     if (this.photos.length === 0) return
-    this.photoResultTarget.textContent = `Así se verá la confirmación para ${this.photos.length} ${this.photos.length === 1 ? "foto seleccionada" : "fotos seleccionadas"}.`
-    this.photoFormTarget.hidden = true
-    this.photoDoneTarget.hidden = false
-    this.focusConfirmation(this.photoDoneTarget)
+    if (!this.persistValue) {
+      this.photoResultTarget.textContent = `Así se verá la confirmación para ${this.photos.length} ${this.photos.length === 1 ? "foto seleccionada" : "fotos seleccionadas"}.`
+      this.showConfirmation(this.photoFormTarget, this.photoDoneTarget)
+      return
+    }
+
+    const body = new FormData(this.photoFormTarget)
+    this.photos.forEach((photo) => body.append("guest_photo[images][]", photo.file, photo.file.name))
+    this.photoErrorTarget.hidden = true
+    this.photoSubmitTarget.disabled = true
+    try {
+      const payload = await this.post(this.photoUrlValue, body)
+      const count = Number(payload.count) || this.photos.length
+      this.photoResultTarget.textContent = count === 1 ? "Tu foto ya está con los novios." : `Tus ${count} fotos ya están con los novios.`
+      this.showConfirmation(this.photoFormTarget, this.photoDoneTarget)
+    } catch (error) {
+      this.photoErrorTarget.textContent = error.message
+      this.photoErrorTarget.hidden = false
+      this.photoSubmitTarget.disabled = false
+    }
   }
 
   clearPhotos() {
@@ -98,7 +115,7 @@ export default class extends Controller {
     this.wishCountTarget.textContent = `${this.wishMessageTarget.value.length} / 1000`
   }
 
-  shareWish(event) {
+  async shareWish(event) {
     event.preventDefault()
     const message = this.wishMessageTarget.value.trim()
     if (!message) {
@@ -106,11 +123,50 @@ export default class extends Controller {
       this.wishMessageTarget.reportValidity()
       return
     }
-    this.wishResultTarget.textContent = message
-    this.wishSignatureTarget.textContent = this.wishNameTarget.value.trim() || "Con mucho cariño"
-    this.wishFormTarget.hidden = true
-    this.wishDoneTarget.hidden = false
-    this.focusConfirmation(this.wishDoneTarget)
+    if (!this.persistValue) {
+      this.wishResultTarget.textContent = message
+      this.wishSignatureTarget.textContent = this.wishNameTarget.value.trim() || "Con mucho cariño"
+      this.showConfirmation(this.wishFormTarget, this.wishDoneTarget)
+      return
+    }
+
+    this.wishErrorTarget.hidden = true
+    try {
+      const body = new FormData()
+      body.append("guest_wish[guest_name]", this.wishNameTarget.value.trim())
+      body.append("guest_wish[body]", message)
+      const payload = await this.post(this.wishUrlValue, body)
+      this.wishResultTarget.textContent = payload.body || message
+      this.wishSignatureTarget.textContent = payload.guest_name || "Con mucho cariño"
+      this.showConfirmation(this.wishFormTarget, this.wishDoneTarget)
+    } catch (error) {
+      this.wishErrorTarget.textContent = error.message
+      this.wishErrorTarget.hidden = false
+    }
+  }
+
+  showConfirmation(form, confirmation) {
+    form.hidden = true
+    confirmation.hidden = false
+    this.focusConfirmation(confirmation)
+  }
+
+  async post(url, body) {
+    if (!url) throw new Error("No pudimos guardar esto. Vuelve a abrir la página de la fiesta.")
+    const token = document.querySelector("meta[name='csrf-token']")?.getAttribute("content")
+    let response
+    try {
+      response = await fetch(url, {
+        method: "POST",
+        headers: { "X-CSRF-Token": token, Accept: "application/json" },
+        body
+      })
+    } catch (_error) {
+      throw new Error("No pudimos enviar esto. Revisa la conexión e inténtalo de nuevo.")
+    }
+    const payload = await response.json().catch(() => ({}))
+    if (!response.ok) throw new Error(payload.error || "No pudimos guardar esto. Inténtalo de nuevo.")
+    return payload
   }
 
   focusConfirmation(section) {

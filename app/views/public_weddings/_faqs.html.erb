@@ -1,0 +1,13 @@
+<% faqs = wedding.faqs.visible.to_a %>
+<% if faqs.any? %>
+  <section class="faq-section guest-section" id="preguntas" aria-labelledby="faq-heading">
+    <span class="eyebrow">PARA DISFRUTAR SIN DUDAS</span>
+    <h2 id="faq-heading">Preguntas frecuentes</h2>
+    <p class="guest-subtitle">Los detalles que te ayudarán a preparar tu visita.</p>
+    <div class="guest-faqs">
+      <% faqs.each do |faq| %>
+        <details class="guest-faq"><summary><%= faq.question %></summary><div class="guest-prose"><%= simple_format h(faq.answer) %></div></details>
+      <% end %>
+    </div>
+  </section>
+<% end %>

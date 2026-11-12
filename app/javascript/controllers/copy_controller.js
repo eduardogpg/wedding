@@ -6,9 +6,9 @@ export default class extends Controller {
   async copy() {
     try {
       await navigator.clipboard.writeText(this.textValue)
-      this.element.querySelector("[data-copy-label]").textContent = "Link copied!"
+      this.element.querySelector("[data-copy-label]").textContent = "Enlace copiado"
     } catch {
-      window.prompt("Copy this wedding link:", this.textValue)
+      window.prompt("Copia este enlace de la boda:", this.textValue)
     }
   }
 }

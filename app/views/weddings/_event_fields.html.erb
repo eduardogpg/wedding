@@ -1,13 +1,13 @@
-<fieldset class="event-editor" data-event-card><legend class="sr-only">Wedding event</legend><%= form.hidden_field :_destroy, value: false, data: { destroy_field: true } %><%= form.hidden_field :position %>
-  <div class="event-editor-heading"><span><%= icon "clock", size: 16 %> Schedule event</span><button type="button" class="remove-event" data-action="wedding-form#removeEvent">Remove event</button></div>
-  <div class="field-row"><div class="field"><%= form.label :title, "Event name" %><%= form.text_field :title, placeholder: "Ceremony", maxlength: 160 %></div><div class="field"><%= form.label :starts_at, "Date & time" %><%= form.datetime_local_field :starts_at, value: form.object.starts_at&.in_time_zone(wedding.timezone)&.strftime("%Y-%m-%dT%H:%M") %></div></div>
-  <div class="field"><%= form.label :venue_name, "Venue name" %><%= form.text_field :venue_name, maxlength: 160, placeholder: "Hacienda San Gabriel" %></div>
-  <div class="field"><%= form.label :address, "Address" %><%= form.text_field :address, maxlength: 1_000, placeholder: "Street, city, and postal code" %></div>
-  <div class="field"><%= form.label :map_url, "Map link (optional)" %><%= form.url_field :map_url, placeholder: "https://maps.google.com/…" %><small>We’ll create a map search link from the venue and address if left blank.</small></div>
+<fieldset class="event-editor" data-event-card><legend class="sr-only">Evento de la boda</legend><%= form.hidden_field :_destroy, value: false, data: { destroy_field: true } %><%= form.hidden_field :position %>
+  <div class="event-editor-heading"><span><%= icon "clock", size: 16 %> Evento del programa</span><button type="button" class="remove-event" data-action="wedding-form#removeEvent">Quitar evento</button></div>
+  <div class="field-row"><div class="field"><%= form.label :title, "Nombre del evento" %><%= form.text_field :title, placeholder: "Ceremonia, recepción u otro momento", maxlength: 160 %></div><div class="field"><%= form.label :starts_at, "Fecha y hora" %><%= form.datetime_local_field :starts_at, value: form.object.starts_at&.in_time_zone(wedding.timezone)&.strftime("%Y-%m-%dT%H:%M") %></div></div>
+  <div class="field"><%= form.label :venue_name, "Nombre del lugar" %><%= form.text_field :venue_name, maxlength: 160, placeholder: "Hacienda San Gabriel" %></div>
+  <div class="field"><%= form.label :address, "Dirección" %><%= form.text_field :address, maxlength: 1_000, placeholder: "Calle, ciudad y código postal" %></div>
+  <div class="field"><%= form.label :map_url, "Enlace del mapa (opcional)" %><%= form.url_field :map_url, placeholder: "https://maps.google.com/…" %><small>Si lo dejas vacío, armamos un enlace de búsqueda con el lugar y la dirección.</small></div>
   <div class="event-map-options">
-    <label class="checkbox-label map-toggle"><%= form.check_box :show_map %><span>Show Google Maps on the wedding page</span></label>
-    <p class="map-help">The map uses the venue name and address. For an exact pin, paste an embed from Google Maps below.</p>
-    <div class="field"><%= form.label :map_embed_url, "Google Maps embed code or URL (optional)" %><%= form.text_area :map_embed_url, rows: 3, maxlength: 6_000, placeholder: 'Paste the code from Google Maps → Share → Embed a map → Copy HTML' %><small>Use the “Embed a map” tab, rather than the short sharing link.</small></div>
+    <label class="checkbox-label map-toggle"><%= form.check_box :show_map %><span>Mostrar Google Maps en la página</span></label>
+    <p class="map-help">El mapa usa el nombre del lugar y la dirección. Para un pin exacto, pega abajo un mapa insertado de Google Maps.</p>
+    <div class="field"><%= form.label :map_embed_url, "Código o enlace de Google Maps (opcional)" %><%= form.text_area :map_embed_url, rows: 3, maxlength: 6_000, placeholder: "Pega el código de Google Maps → Compartir → Insertar un mapa → Copiar HTML" %><small>Usa la pestaña “Insertar un mapa”, no el enlace corto para compartir.</small></div>
   </div>
-  <div class="field"><%= form.label :notes, "A little extra detail (optional)" %><%= form.text_area :notes, rows: 2, maxlength: 1_000, placeholder: "Please arrive 15 minutes before the ceremony." %></div>
+  <div class="field"><%= form.label :notes, "Un detalle extra (opcional)" %><%= form.text_area :notes, rows: 2, maxlength: 1_000, placeholder: "Llega 15 minutos antes de la ceremonia." %></div>
 </fieldset>

@@ -1,0 +1,8 @@
+<div class="event-editor" data-registry-card>
+  <%= form.hidden_field :_destroy, value: "0", data: { destroy_field: true } %>
+  <div class="event-editor-heading"><span>Mesa de regalos</span><button type="button" class="remove-event" data-action="wedding-form#removeRegistry">Quitar</button></div>
+  <div class="field-row">
+    <div class="field"><%= form.label :store_name, "Tienda" %><%= form.text_field :store_name, required: true, maxlength: 80, placeholder: "Liverpool, El Palacio de Hierro, Sears…" %></div>
+    <div class="field"><%= form.label :url, "Enlace de la mesa" %><%= form.url_field :url, required: true, maxlength: 500, placeholder: "https://…" %></div>
+  </div>
+</div>

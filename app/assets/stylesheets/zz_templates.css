@@ -1,0 +1,136 @@
+/* Template choices and upload feedback in the planner editor. */
+.template-picker { border: 0; padding: 0; margin: 0 0 28px; min-width: 0; }
+.template-picker legend { font-size: 11px; font-weight: 500; color: #5b6b51; }
+.template-help { color: #839077; font-size: 11px; line-height: 1.8; margin: 8px 0 14px; }
+.template-options { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.template-option { position: relative; display: flex; flex-direction: column; gap: 8px; padding: 10px; border: 1px solid #e0e4d8; border-radius: 8px; cursor: pointer; background: #fff; }
+.template-option:has(input:checked) { border-color: #678050; outline: 1px solid #678050; background: #f6f8f0; }
+.template-option:focus-within { outline: 2px solid #678050; outline-offset: 3px; }
+.template-option > input { position: absolute; right: 16px; top: 16px; z-index: 1; accent-color: #456136; width: 15px; height: 15px; }
+.template-option strong { font: 19px var(--serif); font-weight: 400; margin-top: 3px; }
+.template-description { font-size: 10px; line-height: 1.7; color: #78836c; }
+.template-mini { position: relative; height: 130px; background: #f6f5ef; overflow: hidden; border: 1px solid #e7e7dc; border-radius: 3px; color: #3e513b; }
+.mini-nav { position: absolute; top: 12px; left: 12px; right: 12px; height: 1px; background: #d7dccc; }
+.mini-title { position: absolute; top: 46px; left: 14px; width: 40%; font: italic 24px Georgia, serif; }
+.mini-photo { position: absolute; width: 40%; height: 83px; top: 30px; right: 12px; background: #d8dfcb; border-radius: 50% 50% 0 0; }
+.mini-lines { position: absolute; top: 81px; left: 14px; height: 12px; width: 28%; border-block: 1px solid #b6c0a8; }
+.template-mini-editorial { background: #42523f; color: #fffbed; }
+.template-mini-editorial .mini-nav { background: #b5bf9e; }
+.template-mini-editorial .mini-photo { inset: 25px -10px auto auto; height: 130px; width: 70%; border-radius: 70% 0 0; background: #65755a; transform: rotate(-16deg); }
+.template-mini-editorial .mini-title { top: 47px; left: 12px; width: 70%; font-size: 31px; z-index: 1; }
+.template-mini-editorial .mini-lines { top: 96px; border-color: #b5bf9e; z-index: 1; }
+.template-mini-classic { background: #f9f5ec; }
+.template-mini-classic::before { content: ''; position: absolute; inset: 8px; border: 1px solid #b9bca2; outline: 1px solid #d9dbca; outline-offset: 3px; }
+.template-mini-classic .mini-nav { left: calc(50% - 10px); right: auto; width: 20px; top: 31px; }
+.template-mini-classic .mini-title { width: 100%; left: 0; top: 46px; text-align: center; font-size: 25px; }
+.template-mini-classic .mini-photo { display: none; }
+.template-mini-classic .mini-lines { top: 85px; left: 35%; width: 30%; }
+.photo-selection-previews { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+.photo-selection-previews:empty { display: none; }
+.photo-selection-tile { display: flex; flex-direction: column; gap: 4px; width: 100px; }
+.photo-selection-previews img, .photo-selection-tile img { width: 100px; height: 85px; object-fit: cover; border-radius: 5px; border: 1px solid #e1e6d8; }
+.photo-selection-tile button { font-size: 10px; text-align: left; }
+.photo-upload-status { font-size: 12px; line-height: 1.7; color: #527140; margin: 8px 0 0; overflow-wrap: anywhere; }
+.photo-upload-status:empty { display: none; }
+.photo-upload-status.upload-error { color: #9a493c; }
+.photo-edit-grid { margin-top: 16px; }
+.pending-photo { min-width: 0; border: 1px solid #dce4cf; background: #f5f8ee; padding: 8px; border-radius: 5px; }
+.pending-photo > span { display: block; font-size: 11px; color: #5b7348; }
+.pending-photo .text-button { display: block; background: none; border: 0; padding: 8px 0 0; text-align: left; font-size: 11px; text-decoration: underline; color: #5b7348; }
+.pending-photo.current-cover { margin-bottom: 12px; }
+.save-preview-hint { font-size: 12px; color: #7b876f; line-height: 1.8; text-align: right; margin: 0 0 14px; }
+
+/* Editorial: an edge-to-edge cover, a date strip, and generous magazine spacing. */
+.page-template-editorial .guest-nav { max-width: none; }
+.page-template-editorial .editorial-hero { display: flex; flex-direction: column; align-items: stretch; justify-content: flex-end; max-width: none; min-height: 780px; padding: 95px 8% 0; gap: 70px; overflow: hidden; color: #fffdf4; background: var(--theme-deep); }
+.editorial-backdrop { position: absolute; inset: 0; overflow: hidden; }
+.editorial-backdrop::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, #111a14bd, #111a1433), linear-gradient(0deg, #111a14cc, transparent 80%); }
+.page-template-editorial .editorial-backdrop .hero-photo { width: 100%; max-width: none; height: 100%; object-fit: cover; border-radius: 0; }
+.editorial-monogram { position: absolute; inset: 0; display: grid; place-items: center; font: italic clamp(180px, 32vw, 500px) Georgia, serif; opacity: .15; transform: rotate(-12deg); color: var(--theme-pale); }
+.editorial-backdrop:not(:has(img))::before { content: ''; position: absolute; width: 70%; height: 150%; border: 1px solid #ffffff30; border-radius: 50%; right: -20%; top: -20%; transform: rotate(-30deg); }
+.page-template-editorial .hero-copy { position: relative; max-width: 1000px; padding: 0; text-align: left; }
+.page-template-editorial .hero-copy .eyebrow { color: #fffdf4; font-size: 10px; letter-spacing: 3px; }
+.page-template-editorial .hero-copy h1 { font-size: clamp(60px, 7.4vw, 110px); line-height: .95; letter-spacing: -3px; display: block; }
+.page-template-editorial .hero-copy h1 span { display: block; }
+.page-template-editorial .hero-copy h1 em { display: inline-block; font-size: .5em; margin: 15px 0; color: #f5ecda; }
+.page-template-editorial .hero-headline { color: #fffdf4; font-size: 22px; margin: 25px 0; }
+.page-template-editorial .wedding-hero .wedding-button { background: #fffdf4; color: #263d2f; border-color: #fffdf4; }
+.editorial-caption { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 28px 0; border-top: 1px solid #ffffff60; font-size: 9px; letter-spacing: 1.5px; }
+.editorial-caption .hero-date { margin: 0; }
+.editorial-caption a { min-height: 44px; display: inline-flex; align-items: center; gap: 20px; }
+.page-template-editorial .invitation-section { background: #fcfbf6; padding-block: 110px; }
+.page-template-editorial .story-section { background: var(--theme-soft); }
+.page-template-editorial .guest-events { gap: 18px; }
+.page-template-editorial .guest-event { text-align: left; padding: 28px; border: 1px solid var(--theme-pale); }
+.page-template-editorial .guest-event p { margin-inline: 0; }
+.page-template-editorial .guest-section h2 { font-size: clamp(38px, 4.5vw, 62px); }
+
+/* Classic: a framed, centered invitation followed by a landscape portrait. */
+.page-template-classic { background: #fbf8f0; }
+.page-template-classic .guest-nav { border-bottom: 0; }
+.page-template-classic .classic-hero { display: block; max-width: 1180px; min-height: 0; padding: 40px 60px 80px; }
+.classic-invitation { position: relative; padding: 65px 40px; border: 1px solid var(--theme-accent); outline: 1px solid var(--theme-pale); outline-offset: 8px; text-align: center; }
+.page-template-classic .hero-copy h1 { font-size: clamp(50px, 6vw, 84px); line-height: 1.1; letter-spacing: -1.5px; margin: 30px 0 25px; }
+.page-template-classic .hero-copy h1 em { font-size: 25px; margin: 12px 0; color: var(--theme-accent); }
+.classic-request { font: italic 18px/1.9 var(--wedding-serif); color: var(--theme-accent); }
+.classic-date { display: flex; align-items: center; justify-content: center; gap: 28px; margin: 30px 0; }
+.classic-date span { width: 110px; padding: 12px 0; border-block: 1px solid var(--theme-pale); text-transform: uppercase; letter-spacing: 2px; font-size: 11px; }
+.classic-date strong { font: 50px var(--wedding-serif); }
+.classic-ornament { display: block; margin-bottom: 25px; color: var(--theme-accent); font-size: 32px; }
+.classic-ornament-bottom { margin: 28px 0 0; font-size: 20px; }
+.page-template-classic .hero-copy .eyebrow { margin: 0; }
+.page-template-classic .hero-headline { font-size: 18px; }
+.classic-portrait { margin: 65px auto 0; max-width: 860px; text-align: center; }
+.page-template-classic .classic-portrait .hero-photo { width: 100%; height: clamp(260px, 40vw, 540px); max-width: none; border-radius: 0; object-fit: cover; }
+.classic-portrait > span { display: block; font: italic 16px var(--wedding-serif); color: var(--theme-accent); margin-top: 20px; }
+.page-template-classic .invitation-section { background: var(--theme-soft); }
+.page-template-classic .story-section { display: block; text-align: center; }
+.page-template-classic .story-section h2 br { display: none; }
+.page-template-classic .story-section .guest-prose { max-width: 640px; margin: 30px auto 0; }
+.page-template-classic .story-sparkle { display: none; }
+.page-template-classic .guest-events { max-width: 850px; margin-inline: auto; }
+.page-template-classic .guest-event { border: 1px solid var(--theme-pale); padding: 35px 25px; }
+.page-template-classic .rsvp-section { background: var(--theme-soft); }
+
+@media (max-width: 760px) {
+  .template-options { gap: 8px; }
+  .template-mini { height: 115px; }
+  .template-option { padding: 8px; }
+  .template-description { font-size: 11px; }
+  .form-actions { flex-wrap: wrap; }
+  .page-template-editorial .editorial-hero { min-height: 730px; padding: 65px 30px 0; gap: 55px; }
+  .page-template-editorial .hero-copy h1 { font-size: 68px; }
+  .editorial-caption { flex-wrap: wrap; gap: 10px 25px; font-size: 8px; }
+  .editorial-caption > span { display: none; }
+  .page-template-classic .classic-hero { padding: 30px 30px 60px; }
+  .classic-invitation { padding: 45px 25px; }
+}
+@media (max-width: 600px) {
+  .template-options { grid-template-columns: 1fr; gap: 12px; }
+  .template-option { display: grid; grid-template-columns: 110px 1fr; grid-template-rows: auto 1fr; gap: 6px 15px; padding: 10px; }
+  .template-option > input { left: 94px; right: auto; top: 18px; }
+  .template-mini { grid-row: 1 / 3; height: 110px; }
+  .template-option strong { margin-top: 12px; font-size: 22px; }
+  .template-description { font-size: 12px; padding-right: 6px; }
+  .mini-title { font-size: 19px; }
+  .template-mini-editorial .mini-title { font-size: 26px; }
+  .save-preview-hint { text-align: left; }
+  .pending-photo .text-button { min-height: 44px; }
+  .page-template-editorial .editorial-hero { min-height: 680px; padding: 55px 25px 0; gap: 45px; }
+  .page-template-editorial .hero-copy { width: 100%; }
+  .page-template-editorial .hero-copy h1 { font-size: 64px; letter-spacing: -2px; }
+  .page-template-editorial .hero-copy .eyebrow { font-size: 8px; letter-spacing: 2px; }
+  .page-template-editorial .hero-headline { font-size: 20px; line-height: 1.6; }
+  .page-template-editorial .editorial-caption .hero-date { font-size: 10px; letter-spacing: 1px; }
+  .page-template-editorial .guest-event { padding: 25px; }
+  .page-template-classic .classic-hero { padding: 25px 24px 50px; }
+  .page-template-classic .classic-invitation { padding: 40px 18px; }
+  .page-template-classic .hero-copy h1 { font-size: 52px; letter-spacing: -1px; }
+  .page-template-classic .hero-copy .eyebrow { font-size: 7px; line-height: 1.8; letter-spacing: 1.2px; }
+  .classic-request { font-size: 16px; }
+  .classic-date { gap: 16px; }
+  .classic-date span { width: 75px; font-size: 9px; letter-spacing: 1px; }
+  .classic-date strong { font-size: 42px; }
+  .classic-portrait { margin-top: 45px; }
+  .page-template-classic .guest-event { padding: 30px 18px; }
+}

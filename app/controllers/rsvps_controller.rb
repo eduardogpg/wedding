@@ -4,9 +4,9 @@ class RsvpsController < PlannerController
   def index
     wedding = Wedding.find(params[:wedding_id])
     csv = CSV.generate do |rows|
-      rows << [ "Guest name", "Email", "Response", "Party size", "Message", "Received (UTC)" ]
+      rows << [ "Nombre", "Correo", "Respuesta", "Personas", "Mensaje", "Recibido (UTC)" ]
       wedding.rsvps.order(:created_at).find_each do |rsvp|
-        rows << [ rsvp.guest_name, rsvp.email, rsvp.attendance, rsvp.party_size, rsvp.message, rsvp.created_at.iso8601 ].map { |value| csv_safe(value) }
+        rows << [ rsvp.guest_name, rsvp.email, rsvp.attending? ? "Asiste" : "No asiste", rsvp.party_size, rsvp.message, rsvp.created_at.iso8601 ].map { |value| csv_safe(value) }
       end
     end
     send_data csv, filename: "#{wedding.subdomain}-rsvps.csv", type: "text/csv", disposition: "attachment"

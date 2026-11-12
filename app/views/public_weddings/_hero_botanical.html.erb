@@ -1,0 +1,4 @@
+  <section class="wedding-hero <%= 'with-photo' if wedding.hero_photo.present? %>" id="home">
+    <div class="hero-copy"><span class="eyebrow">TE INVITAMOS CON ALEGRÍA A CELEBRAR</span><h1><span><%= wedding.partner_one %></span><em>&</em><span><%= wedding.partner_two %></span></h1><div class="hero-rule"></div><p class="hero-date"><%= wedding_date_label(wedding) %></p><p class="hero-headline"><%= wedding.headline %></p><a href="#rsvp" class="button wedding-button">Celebra con nosotros <%= icon "arrow", size: 17 %></a><span class="hero-countdown"><%= countdown_label(wedding) %></span></div>
+    <div class="hero-art"><% if wedding.hero_photo.present? %><%= image_tag wedding.hero_photo.variant(resize_to_limit: [1600, 1800]), alt: "#{wedding.couple_names}, celebrando su boda", class: "hero-photo" %><% else %><div class="botanical-arch"><%= render "shared/botanical" %><span><%= wedding.initials %></span><small>UN AMOR EN FLOR</small></div><% end %></div>
+  </section>

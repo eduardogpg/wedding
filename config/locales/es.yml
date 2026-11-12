@@ -1,0 +1,93 @@
+es:
+  date:
+    formats:
+      default: "%-d/%m/%Y"
+      short: "%-d %b"
+      long: "%-d de %B de %Y"
+      weekday: "%A %-d de %B de %Y"
+    day_names: [domingo, lunes, martes, miércoles, jueves, viernes, sábado]
+    abbr_day_names: [dom, lun, mar, mié, jue, vie, sáb]
+    month_names: [~, enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre]
+    abbr_month_names: [~, ene, feb, mar, abr, may, jun, jul, ago, sep, oct, nov, dic]
+  time:
+    formats:
+      default: "%-d de %B de %Y, %H:%M"
+      short: "%-d %b, %H:%M"
+      long: "%-d de %B de %Y, %H:%M"
+      time_only: "%H:%M"
+    am: "a. m."
+    pm: "p. m."
+  support:
+    array:
+      words_connector: ", "
+      two_words_connector: " y "
+      last_word_connector: " y "
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      blank: "no puede estar en blanco"
+      empty: "no puede estar vacío"
+      invalid: "no es válido"
+      taken: "ya está en uso"
+      too_long:
+        one: "es demasiado largo (máximo 1 carácter)"
+        other: "es demasiado largo (máximo %{count} caracteres)"
+      too_short:
+        one: "es demasiado corto (mínimo 1 carácter)"
+        other: "es demasiado corto (mínimo %{count} caracteres)"
+      inclusion: "no está incluido en la lista"
+      exclusion: "está reservado"
+      not_a_number: "no es un número"
+      not_an_integer: "debe ser un número entero"
+      greater_than_or_equal_to: "debe ser mayor o igual que %{count}"
+      less_than_or_equal_to: "debe ser menor o igual que %{count}"
+      in: "debe estar entre %{count}"
+      confirmation: "no coincide"
+  activerecord:
+    errors:
+      messages:
+        record_invalid: "La validación falló: %{errors}"
+    attributes:
+      wedding:
+        faqs: "Preguntas frecuentes"
+        partner_one: "Nombre de la primera persona"
+        partner_two: "Nombre de la segunda persona"
+        subdomain: "Dirección de la página"
+        wedding_date: "Fecha de la boda"
+        timezone: "Zona horaria"
+        invitation_text: "Mensaje de invitación"
+        story: "Historia"
+        dress_code: "Código de vestimenta"
+        rsvp_deadline: "Fecha límite de confirmación"
+        headline: "Titular"
+        theme: "Paleta"
+        gallery_layout: "Presentación de las fotos"
+        page_template: "Plantilla"
+        celebration_starts_at: "Apertura de la página de la fiesta"
+        landing_mode: "Página de inicio"
+        gallery_photos: "Fotos"
+        cover_photo: "Foto de portada"
+        base: ""
+      wedding_faq:
+        question: "Pregunta"
+        answer: "Respuesta"
+      gift_registry:
+        store_name: "Tienda"
+        url: "Enlace de la mesa"
+      event:
+        title: "Nombre del evento"
+        starts_at: "Fecha y hora"
+        venue_name: "Lugar"
+        address: "Dirección"
+        map_url: "Enlace del mapa"
+        map_embed_url: "Mapa de Google"
+        notes: "Notas"
+      rsvp:
+        guest_name: "Nombre"
+        email: "Correo"
+        attendance: "Asistencia"
+        party_size: "Número de personas"
+        message: "Nota"
+      user:
+        email: "Correo"
+        password: "Contraseña"
