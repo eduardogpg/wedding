@@ -251,3 +251,7 @@ make annotate
 La configuración está en `.annotaterb.yml`. Solo se anotan los modelos; las
 pruebas, fixtures y rutas quedan fuera de la generación. Las anotaciones se
 generan desde el esquema de la base de datos, sin modificar sus registros.
+
+## Despliegue en DigitalOcean
+
+Consulta la [guía en español para Ubuntu, un Droplet, PostgreSQL y Amazon S3](docs/despliegue-digitalocean.md). Incluye la preparación pendiente de producción, Docker Compose, HTTPS wildcard, respaldos y actualizaciones. Los archivos de producción se presentan como ejemplos para crear; el entorno local conserva sus comandos actuales.
