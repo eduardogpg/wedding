@@ -1,0 +1,8 @@
+<fieldset class="event-editor" data-faq-card>
+  <legend class="sr-only">Pregunta frecuente</legend>
+  <%= form.hidden_field :_destroy, value: "0", data: { destroy_field: true } %>
+  <div class="event-editor-heading"><span>Pregunta frecuente</span><button type="button" class="remove-event" data-action="wedding-form#removeFaq">Quitar pregunta</button></div>
+  <div class="field"><%= form.label :question, "Pregunta" %><%= form.text_field :question, maxlength: 200, placeholder: "¿Hay estacionamiento?" %></div>
+  <div class="field"><%= form.label :answer, "Respuesta" %><%= form.text_area :answer, rows: 3, maxlength: 3_000, placeholder: "Escribe la información que quieres compartir con los invitados." %></div>
+  <label class="checkbox-label"><%= form.check_box :visible %> Mostrar esta pregunta en la invitación</label>
+</fieldset>

@@ -41,7 +41,7 @@ class PublicWeddingTest < ActionDispatch::IntegrationTest
       post "/rsvp", params: params
     end
     assert_response :unprocessable_entity
-    assert_select ".error-summary", /already responded/
+    assert_select ".error-summary", /ya respondió/
   end
 
   test "closed RSVPs cannot be submitted by posting directly" do
@@ -52,6 +52,16 @@ class PublicWeddingTest < ActionDispatch::IntegrationTest
     assert_redirected_to "/#rsvp"
     get "/"
     assert_select "form[action='/rsvp']", count: 0
+  end
+
+  test "gift registry links open the store lists" do
+    @wedding.gift_registries.create!(store_name: "Liverpool", url: "https://mesaderegalos.liverpool.com.mx/ejemplo")
+    @wedding.gift_registries.create!(store_name: "El Palacio de Hierro", url: "https://www.elpalaciodehierro.com/mesa")
+
+    get "/"
+    assert_select "#regalos a[href=?]", "https://mesaderegalos.liverpool.com.mx/ejemplo", text: /Liverpool/
+    assert_select "#regalos a[href=?]", "https://www.elpalaciodehierro.com/mesa", text: /Palacio de Hierro/
+    assert_select "a[href='#regalos']", text: "Mesa de regalos"
   end
 
   test "guest response is scoped to the wedding subdomain" do

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   constraints ->(request) { planner_hosts.include?(request.host) } do
     root "weddings#index"
     resource :session, only: %i[new create destroy]
+    post "photo_uploads", to: "photo_uploads#create", as: :photo_uploads
     resources :weddings do
       member do
         get :preview
@@ -20,7 +21,10 @@ Rails.application.routes.draw do
 
   constraints ->(request) { request.host.match?(/\A[a-z0-9]+(?:-[a-z0-9]+)*\.#{Regexp.escape(domain)}\z/) && !planner_hosts.include?(request.host) } do
     get "/", to: "public_weddings#show", as: :guest_root
+    get "/invitacion", to: "public_weddings#invitation", as: :guest_invitation
     get "/fiesta", to: "public_weddings#live", as: :guest_live
     post "/rsvp", to: "public_weddings#respond", as: :guest_rsvp
+    post "/wishes", to: "public_weddings#create_wish", as: :guest_wishes
+    post "/photos", to: "public_weddings#create_photos", as: :guest_photos
   end
 end

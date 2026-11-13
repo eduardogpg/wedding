@@ -14,7 +14,7 @@ class PlannerFlowTest < ActionDispatch::IntegrationTest
     sign_in
     get root_path
     assert_response :success
-    assert_select "h1", /Beautiful days start here/
+    assert_select "h1", /Los días hermosos empiezan aquí/
     delete session_path
     get root_path
     assert_redirected_to new_session_path
@@ -43,7 +43,7 @@ class PlannerFlowTest < ActionDispatch::IntegrationTest
     assert_equal "Our beautiful day", wedding.reload.headline
     get preview_wedding_path(wedding)
     assert_response :success
-    assert_select ".preview-banner", /Planner preview/
+    assert_select ".preview-banner a[href=?]", wedding_path(wedding)
     patch publish_wedding_path(wedding)
     assert wedding.reload.published?
     patch unpublish_wedding_path(wedding)
@@ -56,7 +56,7 @@ class PlannerFlowTest < ActionDispatch::IntegrationTest
       post weddings_path, params: { wedding: wedding_attributes(partner_one: "", subdomain: "app") }
     end
     assert_response :unprocessable_entity
-    assert_select ".error-summary", /reserved/
+    assert_select ".error-summary", /reservada/
   end
 
   test "search and publication filters render only matching weddings" do
@@ -77,6 +77,26 @@ class PlannerFlowTest < ActionDispatch::IntegrationTest
     patch wedding_path(wedding), params: { wedding: { events_attributes: { "0" => { id: event.id, title: "Changed" } } } }
     assert_response :not_found
     assert_equal "Private event", event.reload.title
+  end
+
+  test "planner can share gift registry links and a bad address is rejected" do
+    sign_in
+    wedding = create_wedding
+    get edit_wedding_path(wedding)
+    assert_select "button", text: "Agregar mesa de regalos"
+
+    patch wedding_path(wedding), params: { wedding: { gift_registries_attributes: {
+      "0" => { store_name: "Liverpool", url: "javascript:alert(1)" }
+    } } }
+    assert_response :unprocessable_entity
+    assert_equal 0, wedding.reload.gift_registries.count
+
+    patch wedding_path(wedding), params: { wedding: { gift_registries_attributes: {
+      "1794524402409" => { store_name: "Liverpool", url: "https://mesaderegalos.liverpool.com.mx/ejemplo" },
+      "1794524402410" => { store_name: "El Palacio de Hierro", url: "https://www.elpalaciodehierro.com/mesa" }
+    } } }
+    assert_redirected_to wedding_path(wedding)
+    assert_equal [ "El Palacio de Hierro", "Liverpool" ], wedding.reload.gift_registries.map(&:store_name).sort
   end
 
   test "RSVP export protects guest spreadsheet values" do

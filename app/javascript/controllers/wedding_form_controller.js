@@ -1,11 +1,11 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["events", "eventTemplate", "partnerOne", "partnerTwo", "subdomain"]
+  static targets = ["faqs", "faqTemplate", "events", "eventTemplate", "registries", "registryTemplate", "partnerOne", "partnerTwo", "subdomain"]
 
   connect() {
     this.subdomainEdited = this.subdomainTarget.dataset.autoSuggest !== "true"
-    this.nextEvent = 0
+    this.nextIndex = Date.now()
   }
 
   suggestSubdomain() {
@@ -17,13 +17,41 @@ export default class extends Controller {
   markSubdomainEdited() { this.subdomainEdited = true }
 
   addEvent() {
-    const key = `new_${Date.now()}_${this.nextEvent++}`
+    const key = this.nextKey()
     this.eventsTarget.insertAdjacentHTML("beforeend", this.eventTemplateTarget.innerHTML.replaceAll("NEW_EVENT", key))
     this.eventsTarget.lastElementChild.querySelector('input[type="text"]').focus()
   }
 
   removeEvent(event) {
-    const card = event.currentTarget.closest("[data-event-card]")
+    this.removeCard(event.currentTarget.closest("[data-event-card]"))
+  }
+
+  addRegistry() {
+    const key = this.nextKey()
+    this.registriesTarget.insertAdjacentHTML("beforeend", this.registryTemplateTarget.innerHTML.replaceAll("NEW_REGISTRY", key))
+    this.registriesTarget.lastElementChild.querySelector("input[type='text']").focus()
+  }
+
+  removeRegistry(event) {
+    this.removeCard(event.currentTarget.closest("[data-registry-card]"))
+  }
+
+  addFaq() {
+    const key = this.nextKey()
+    this.faqsTarget.insertAdjacentHTML("beforeend", this.faqTemplateTarget.innerHTML.replaceAll("NEW_FAQ", key))
+    this.faqsTarget.lastElementChild.querySelector("input[type=text]").focus()
+  }
+
+  nextKey() {
+    this.nextIndex += 1
+    return String(this.nextIndex)
+  }
+
+  removeFaq(event) {
+    this.removeCard(event.currentTarget.closest("[data-faq-card]"))
+  }
+
+  removeCard(card) {
     card.querySelector("[data-destroy-field]").value = "1"
     card.hidden = true
     card.querySelectorAll("input:not([type=hidden]), textarea").forEach(input => input.required = false)

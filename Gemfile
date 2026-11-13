@@ -16,3 +16,7 @@ gem "image_processing", "~> 1.2"
 group :development, :test do
   gem "debug", require: "debug/prelude"
 end
+
+group :development do
+  gem "annotaterb", "~> 4.26"
+end

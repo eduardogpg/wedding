@@ -3,7 +3,7 @@ require "test_helper"
 class GalleryAndMapsTest < ActionDispatch::IntegrationTest
   setup do
     @wedding = create_wedding(status: :published)
-    @event = @wedding.events.create!(title: "Ceremony", venue_name: "Jardín", address: "San Miguel de Allende, Mexico", starts_at: Time.current)
+    @event = @wedding.events.create!(title: "Ceremony", venue_name: "Jardín", address: "San Miguel de Allende, Mexico", starts_at: Time.zone.parse("#{@wedding.wedding_date} 16:00"))
   end
 
   test "gallery renders carousel controls and can switch to a grid" do
@@ -17,10 +17,10 @@ class GalleryAndMapsTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select ".photo-carousel[data-controller='carousel']"
     assert_select ".carousel-slide", count: 2
-    assert_select "button[aria-label='Previous photo'][disabled]"
-    assert_select "button[aria-label='Next photo']"
+    assert_select "button[data-carousel-target='previous'][disabled]"
+    assert_select "button[data-carousel-target='next']"
     assert_select ".carousel-dot", count: 2
-    assert_select ".carousel-counter", "Photo 1 of 2"
+    assert_select ".carousel-counter", /1.*2/
 
     patch wedding_path(@wedding), params: { wedding: { gallery_layout: "grid" } }
     assert_redirected_to wedding_path(@wedding)
@@ -58,7 +58,7 @@ class GalleryAndMapsTest < ActionDispatch::IntegrationTest
     host! "#{@wedding.subdomain}.localhost"
     get "/"
     assert_select ".venue-map iframe", count: 0
-    assert_select ".guest-event a", "Open in Google Maps"
+    assert_select ".guest-event a[href=?]", @event.map_link
   end
 
   test "venue and address generate a map when no embed code is supplied" do
@@ -77,7 +77,7 @@ class GalleryAndMapsTest < ActionDispatch::IntegrationTest
     } } }
     assert_response :unprocessable_entity
     assert_select ".error-summary", /Google Maps/
-    assert_select ".error-summary", /Gallery layout/
+    assert_select ".error-summary", text: /#{Regexp.escape(Wedding.human_attribute_name(:gallery_layout))}/
     assert_nil @event.reload.map_embed_url
     assert_equal "carousel", @wedding.reload.gallery_layout
   end

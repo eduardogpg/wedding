@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
-    <title><%= content_for(:title) || "Boda · Wedding planner" %></title>
+    <title><%= content_for(:title) || "Boda · Planificador de bodas" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <%= csrf_meta_tags %><%= csp_meta_tag %>
@@ -12,23 +12,23 @@
   <body class="planner-shell">
     <aside class="sidebar">
       <%= link_to root_path, class: "brand" do %><span class="brand-symbol">✳</span> boda<span class="brand-dot">.</span><% end %>
-      <span class="brand-caption">A LITTLE MORE HAPPILY EVER AFTER</span>
-      <p class="nav-label">YOUR WORKSPACE</p>
-      <nav aria-label="Main navigation">
-        <%= link_to root_path, class: "nav-item #{'active' if action_name == 'index' && params[:status].blank?}" do %><%= icon "grid" %> Overview<% end %>
-        <%= link_to root_path(anchor: "wedding-list"), class: "nav-item" do %><%= icon "heart" %> All weddings<% end %>
-        <%= link_to root_path(status: "published"), class: "nav-item #{'active' if params[:status] == 'published'}" do %><%= icon "globe" %> Published pages<% end %>
-        <%= link_to root_path(status: "draft"), class: "nav-item #{'active' if params[:status] == 'draft'}" do %><%= icon "edit" %> Drafts<% end %>
+      <span class="brand-caption">UN POCO MÁS DE FELICES PARA SIEMPRE</span>
+      <p class="nav-label">TU ESPACIO</p>
+      <nav aria-label="Navegación principal">
+        <%= link_to root_path, class: "nav-item #{'active' if action_name == 'index' && params[:status].blank?}" do %><%= icon "grid" %> Resumen<% end %>
+        <%= link_to root_path(anchor: "wedding-list"), class: "nav-item" do %><%= icon "heart" %> Todas las bodas<% end %>
+        <%= link_to root_path(status: "published"), class: "nav-item #{'active' if params[:status] == 'published'}" do %><%= icon "globe" %> Páginas publicadas<% end %>
+        <%= link_to root_path(status: "draft"), class: "nav-item #{'active' if params[:status] == 'draft'}" do %><%= icon "edit" %> Borradores<% end %>
       </nav>
-      <div class="sidebar-note"><span class="small-flower">✳</span><p>Big days.<br>Beautifully organized.</p><span>More time for the moments<br>that matter.</span></div>
-      <div class="sidebar-account"><span class="avatar"><%= current_user.email.first.upcase %></span><div><strong>Your planner space</strong><small><%= current_user.email %></small></div><%= button_to session_path, method: :delete, class: "icon-button", title: "Sign out", aria: { label: "Sign out" } do %><%= icon "logout", size: 17 %><% end %></div>
+      <div class="sidebar-note"><span class="small-flower">✳</span><p>Días grandes.<br>Bien organizados.</p><span>Más tiempo para los momentos<br>que importan.</span></div>
+      <div class="sidebar-account"><span class="avatar"><%= current_user.email.first.upcase %></span><div><strong>Tu espacio de planner</strong><small><%= current_user.email %></small></div><%= button_to session_path, method: :delete, class: "icon-button", title: "Cerrar sesión", aria: { label: "Cerrar sesión" } do %><%= icon "logout", size: 17 %><% end %></div>
     </aside>
     <div class="workspace">
-      <header class="topbar"><span>PLANNER STUDIO <span class="topbar-divider">/</span> <span class="topbar-page"><%= content_for(:breadcrumb) || "Overview" %></span></span><span class="today"><%= icon "calendar", size: 16 %><%= Date.current.strftime("%A, %B %-d") %></span></header>
+      <header class="topbar"><span>ESTUDIO <span class="topbar-divider">/</span> <span class="topbar-page"><%= content_for(:breadcrumb) || "Resumen" %></span></span><span class="today"><%= icon "calendar", size: 16 %><%= l Date.current, format: :weekday %></span></header>
       <main class="main-content">
         <%= render "shared/flashes" %>
         <%= yield %>
-        <footer class="workspace-footer"><span>Made for meaningful celebrations.</span><span>BODA · PLANNER STUDIO</span></footer>
+        <footer class="workspace-footer"><span>Hecho para celebraciones que importan.</span><span>BODA · ESTUDIO</span></footer>
       </main>
     </div>
   </body>

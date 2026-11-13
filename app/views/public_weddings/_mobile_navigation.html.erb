@@ -1,6 +1,8 @@
-<nav class="mobile-wedding-nav" aria-label="Quick wedding links">
-  <a href="#home"><%= icon "heart", size: 19 %><span>Invitation</span></a>
-  <a href="#celebration"><%= icon "pin", size: 19 %><span>Schedule & maps</span></a>
-  <% if wedding.gallery_photos.attached? %><a href="#moments"><%= icon "image", size: 19 %><span>Photos</span></a><% end %>
-  <a href="#rsvp"><%= icon "users", size: 19 %><span>RSVP</span></a>
+<nav class="mobile-wedding-nav" aria-label="Accesos de la boda">
+  <a href="#home"><%= icon "heart", size: 19 %><span>Invitación</span></a>
+  <a href="#celebration"><%= icon "pin", size: 19 %><span>Programa y mapas</span></a>
+  <% if wedding.gallery_photos.attached? %><a href="#moments"><%= icon "image", size: 19 %><span>Fotos</span></a><% end %>
+  <% if wedding.gift_registries.any? %><a href="#regalos"><%= icon "heart", size: 19 %><span>Regalos</span></a><% end %>
+  <% if wedding.faqs.visible.exists? %><a href="#preguntas"><%= icon "users", size: 19 %><span>Dudas</span></a><% end %>
+  <a href="#rsvp"><%= icon "users", size: 19 %><span>Confirmar</span></a>
 </nav>

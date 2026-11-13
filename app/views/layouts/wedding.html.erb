@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html lang="<%= @live_mock ? 'es' : 'en' %>">
+<% live_page = @live || @live_mock %>
+<html lang="es">
   <head>
-    <title><%= @wedding.couple_names %> · <%= @live_mock ? 'La fiesta ya comenzó' : 'We’re getting married' %></title>
+    <title><%= @wedding.couple_names %> · <%= live_page ? 'La fiesta ya comenzó' : 'Nos casamos' %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-    <meta name="description" content="Join us to celebrate <%= @wedding.couple_names %> on <%= wedding_date_label(@wedding) %>.">
+    <meta name="description" content="Te invitamos a celebrar a <%= @wedding.couple_names %> el <%= wedding_date_label(@wedding) %>.">
     <meta name="robots" content="noindex, nofollow">
     <%= csrf_meta_tags %><%= csp_meta_tag %>
     <%= favicon_link_tag "boda.svg", type: "image/svg+xml" %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-  <body class="wedding-page theme-<%= @wedding.theme %><%= ' live-event-page' if @live_mock %>">
-    <% if @preview %><div class="preview-banner"><span>Planner preview · <%= @wedding.status %></span><%= link_to "← Back to wedding", wedding_path(@wedding) %></div><% end %>
+  <body class="wedding-page theme-<%= @wedding.theme %><%= live_page ? ' live-event-page' : " page-template-#{@wedding.page_template}" %>">
+    <% if @preview %><div class="preview-banner"><span>Vista previa · <%= wedding_status_label(@wedding) %></span><%= link_to "← Volver a la boda", wedding_path(@wedding) %></div><% end %>
     <%= yield %>
   </body>
 </html>

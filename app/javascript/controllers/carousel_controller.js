@@ -46,7 +46,7 @@ export default class extends Controller {
         else dot.removeAttribute("aria-current")
       })
       if (this.hasCounterTarget) {
-        const text = `Photo ${this.index + 1} of ${this.slideTargets.length}`
+        const text = `Foto ${this.index + 1} de ${this.slideTargets.length}`
         if (this.counterTarget.textContent !== text) this.counterTarget.textContent = text
       }
     })

@@ -16,7 +16,7 @@ class WeddingTest < ActiveSupport::TestCase
   test "RSVP deadline cannot follow the wedding date" do
     wedding = Wedding.new(wedding_attributes(rsvp_deadline: Date.current + 91.days))
     assert_not wedding.valid?
-    assert_includes wedding.errors[:rsvp_deadline], "must be on or before the wedding date"
+    assert_includes wedding.errors[:rsvp_deadline], "debe ser el mismo día de la boda o antes"
   end
 
   test "drafts and past weddings do not accept RSVPs" do
@@ -34,7 +34,7 @@ class WeddingTest < ActiveSupport::TestCase
     wedding = Wedding.new(wedding_attributes)
     wedding.cover_photo.attach(io: StringIO.new('<svg xmlns="http://www.w3.org/2000/svg"></svg>'), filename: "unsafe.svg", content_type: "image/svg+xml")
     assert_not wedding.valid?
-    assert_includes wedding.errors[:base], "Photos must be JPEG, PNG, or WebP"
+    assert_includes wedding.errors[:base], "Las fotos deben ser JPEG, PNG o WebP."
   end
 
   test "map URLs only allow full HTTPS addresses" do

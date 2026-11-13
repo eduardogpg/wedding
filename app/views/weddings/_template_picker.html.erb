@@ -1,0 +1,13 @@
+<fieldset class="template-picker">
+  <legend>Plantilla de la página</legend>
+  <p class="template-help">Elige un diseño y luego dale tus colores con la paleta de abajo.</p>
+  <div class="template-options">
+    <% Wedding::PAGE_TEMPLATES.each do |key, template| %>
+      <label class="template-option">
+        <%= form.radio_button :page_template, key %>
+        <span class="template-mini template-mini-<%= key %>" aria-hidden="true"><span class="mini-nav"></span><span class="mini-title">A y B</span><span class="mini-photo"></span><span class="mini-lines"></span></span>
+        <strong><%= template[:name] %></strong><span class="template-description"><%= template[:description] %></span>
+      </label>
+    <% end %>
+  </div>
+</fieldset>

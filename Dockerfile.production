@@ -1,0 +1,20 @@
+FROM ruby:3.4-slim-bookworm
+
+RUN apt-get update -qq && apt-get install --no-install-recommends -y \
+    build-essential git libpq-dev libyaml-dev libvips && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+ENV RAILS_ENV=production \
+    BUNDLE_DEPLOYMENT=1 \
+    BUNDLE_WITHOUT=development:test
+
+COPY Gemfile Gemfile.lock ./
+RUN bundle install
+
+COPY . .
+RUN SECRET_KEY_BASE_DUMMY=1 bin/rails assets:precompile
+RUN mkdir -p tmp/pids log storage
+
+EXPOSE 3000
+CMD ["bundle", "exec", "puma", "-b", "tcp://0.0.0.0:3000"]

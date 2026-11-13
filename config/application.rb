@@ -23,6 +23,8 @@ module Boda
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 8.1
     config.time_zone = "Mexico City"
+    config.i18n.default_locale = :es
+    config.i18n.available_locales = %i[es en]
     config.x.app_domain = ENV.fetch("APP_DOMAIN", "localhost").downcase
     config.x.app_port = ENV.fetch("APP_PORT", "3000")
     config.x.app_protocol = ENV.fetch("APP_PROTOCOL", "http")

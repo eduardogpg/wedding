@@ -1,0 +1,14 @@
+.faq-editor { margin-top: 30px; border-top: 1px solid #e5e7de; padding-top: 24px; }
+.faq-editor > p { font-size: 12px; line-height: 1.9; color: #78836c; }
+.faq-editor h3 { font: 24px var(--serif); margin-bottom: 12px; }
+.faq-editor .checkbox-label { font-size: 12px; line-height: 1.8; }
+.faq-section { text-align: center; background: var(--theme-soft); }
+.guest-faqs { max-width: 800px; margin: 35px auto 0; text-align: left; }
+.guest-faq { border-bottom: 1px solid var(--theme-pale); }
+.guest-faq:first-child { border-top: 1px solid var(--theme-pale); }
+.guest-faq summary { padding: 23px 8px; cursor: pointer; font: 22px/1.5 var(--wedding-serif); overflow-wrap: anywhere; min-height: 48px; }
+.guest-faq summary::marker { color: var(--theme-accent); font-size: 14px; }
+.guest-faq .guest-prose { padding: 0 8px 12px; white-space: normal; }
+@media (max-width: 600px) { .guest-faq summary { font-size: 20px; } }
+
+.guest-nav nav { flex-wrap: wrap; justify-content: flex-end; }

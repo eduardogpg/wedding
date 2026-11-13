@@ -1,3 +1,29 @@
+# == Schema Information
+#
+# Table name: events
+#
+#  id            :bigint           not null, primary key
+#  address       :text
+#  map_embed_url :text
+#  map_url       :string
+#  notes         :text
+#  position      :integer          default(0), not null
+#  show_map      :boolean          default(TRUE), not null
+#  starts_at     :datetime         not null
+#  title         :string           not null
+#  venue_name    :string           not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  wedding_id    :bigint           not null
+#
+# Indexes
+#
+#  index_events_on_wedding_id  (wedding_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (wedding_id => weddings.id)
+#
 class Event < ApplicationRecord
   GOOGLE_MAP_HOSTS = %w[www.google.com google.com maps.google.com].freeze
 
@@ -31,9 +57,9 @@ class Event < ApplicationRecord
     return if map_url.blank?
 
     uri = URI.parse(map_url)
-    errors.add(:map_url, "must be a full HTTPS address") unless uri.is_a?(URI::HTTPS) && uri.host.present? && uri.userinfo.nil?
+    errors.add(:map_url, "debe ser una dirección HTTPS completa") unless uri.is_a?(URI::HTTPS) && uri.host.present? && uri.userinfo.nil?
   rescue URI::InvalidURIError
-    errors.add(:map_url, "must be a full HTTPS address")
+    errors.add(:map_url, "debe ser una dirección HTTPS completa")
   end
 
   def safe_map_embed_url
@@ -43,8 +69,8 @@ class Event < ApplicationRecord
     valid = uri.is_a?(URI::HTTPS) && GOOGLE_MAP_HOSTS.include?(uri.host) &&
       uri.port == 443 && uri.userinfo.nil? &&
       (uri.path == "/maps/embed" || uri.path.match?(%r{\A/maps/embed/v1/(place|view|directions|search|streetview)\z}))
-    errors.add(:map_embed_url, "must come from Google Maps → Share → Embed a map") unless valid
+    errors.add(:map_embed_url, "debe venir de Google Maps → Compartir → Insertar un mapa") unless valid
   rescue URI::InvalidURIError
-    errors.add(:map_embed_url, "must be a valid Google Maps embed URL or iframe code")
+    errors.add(:map_embed_url, "debe ser un enlace o código válido de Google Maps")
   end
 end

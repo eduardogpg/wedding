@@ -1,0 +1,10 @@
+{
+	email {$ACME_EMAIL}
+}
+
+{$APP_DOMAIN}, *.{$APP_DOMAIN} {
+	tls {
+		dns digitalocean {$DO_AUTH_TOKEN}
+	}
+	reverse_proxy web:3000
+}
